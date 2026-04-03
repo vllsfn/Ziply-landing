@@ -76,18 +76,23 @@
             padding: var(--spacing-mobile) 20px;
             position: relative;
             overflow: hidden;
+            background: radial-gradient(circle at center, rgba(0, 212, 170, 0.08) 0%, rgba(10, 10, 10, 1) 70%);
         }
         
         .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: var(--gradient-green);
-            opacity: 0.1;
-            z-index: 0;
+            display: none;
+        }
+        
+        .hero-mockup {
+            max-width: 400px;
+            width: 100%;
+            margin: 50px auto 0;
+            filter: drop-shadow(0 30px 80px rgba(0, 212, 170, 0.4));
+        }
+        
+        .hero-mockup img {
+            width: 100%;
+            height: auto;
         }
         
         .hero-content {
@@ -97,7 +102,7 @@
         }
         
         .hero h1 {
-            font-size: 36px;
+            font-size: 48px;
             font-weight: 700;
             margin-bottom: 20px;
             line-height: 1.2;
@@ -114,7 +119,7 @@
         .email-form {
             display: flex;
             gap: 10px;
-            max-width: 500px;
+            max-width: 600px;
             margin: 0 auto;
             flex-direction: column;
         }
@@ -212,15 +217,28 @@
         .feature-visual {
             width: 100%;
             height: 400px;
-            background: var(--gradient-green);
             border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .feature-visual img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .feature-visual.mockup {
+            background: transparent;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            padding: 40px;
+        }
+        
+        .feature-visual.mockup img {
+            object-fit: contain;
+            max-height: 100%;
         }
         
         /* Alternanza layout desktop */
@@ -418,6 +436,10 @@
             </form>
             
             <div class="form-message" id="formMessage"></div>
+            
+            <div class="hero-mockup">
+                <img src="img-hero.png" alt="Ziply App - La tua lista della spesa" />
+            </div>
         </div>
     </section>
     
@@ -432,7 +454,7 @@
                     <p>Ziply pensa alla tua spesa. Tu ti godi il tempo libero senza pensieri.</p>
                 </div>
                 <div class="feature-visual">
-                    Screenshot lista app
+                    <img src="img-section1.jpg" alt="Ingredienti freschi e organizzati" />
                 </div>
             </div>
         </div>
@@ -448,8 +470,8 @@
                     <h2>Pensato per come mangi davvero</h2>
                     <p>Ogni lista si adatta alle tue abitudini, gusti e necessità. Modifichi quello che vuoi in un tap.</p>
                 </div>
-                <div class="feature-visual">
-                    Screenshot editing lista
+                <div class="feature-visual mockup">
+                    <img src="img-section2.png" alt="Ziply genera la tua lista personalizzata" />
                 </div>
             </div>
         </div>
@@ -466,7 +488,7 @@
                     <p>Compri solo l'essenziale. Meno cibo buttato, meno soldi sprecati. La tua spesa costa meno.</p>
                 </div>
                 <div class="feature-visual">
-                    Immagine risparmio
+                    <img src="img-section3.png" alt="Ordine confermato - risparmio garantito" />
                 </div>
             </div>
         </div>
@@ -598,8 +620,8 @@
         // ========================================
         // FORM SUBMISSION - SUPABASE
         // ========================================
-        const SUPABASE_URL = 'https://xhpfrftzcjgnikdzsbzq.supabase.co'; // INSERISCI QUI
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhocGZyZnR6Y2pnbmlrZHpzYnpxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc4OTgwNDIsImV4cCI6MjA4MzQ3NDA0Mn0.Zg4dtHBjmgjXNDQurbZblVvDAQu0TnQ5Gk-j7FZps30'; // INSERISCI QUI
+        const SUPABASE_URL = 'TUA_SUPABASE_URL'; // INSERISCI QUI
+        const SUPABASE_ANON_KEY = 'TUA_SUPABASE_ANON_KEY'; // INSERISCI QUI
         
         async function submitEmail(email, formId) {
             const messageEl = document.getElementById(formId === 'waitlistForm' ? 'formMessage' : 'formMessageFooter');
