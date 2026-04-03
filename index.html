@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ziply - La tua spesa settimanale, sempre pronta. Liste personalizzate, zero sprechi, zero stress.">
+    <title>Ziply - La tua spesa, sempre pronta</title>
+    
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "TUO_CLARITY_ID");
+    </script>
+    
+    <style>
+        /* ========================================
+           VARIABILI CSS - MODIFICA QUI I COLORI
+           ======================================== */
+        :root {
+            /* Colori principali */
+            --color-primary: #00D4AA;        /* Verde acqua - CTA */
+            --color-primary-dark: #0A5F4E;   /* Verde scuro */
+            --color-bg: #0a0a0a;             /* Sfondo nero */
+            --color-bg-section: #141414;     /* Sfondo sezioni */
+            --color-text: #ffffff;           /* Testo principale */
+            --color-text-gray: #999999;      /* Testo secondario */
+            --color-border: #333333;         /* Bordi */
+            
+            /* Font */
+            --font-main: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            
+            /* Spaziature */
+            --spacing-section: 80px;
+            --spacing-mobile: 40px;
+            --container-max: 1200px;
+            
+            /* Gradienti */
+            --gradient-green: linear-gradient(135deg, #00D4AA 0%, #0A5F4E 100%);
+        }
+        
+        /* ========================================
+           RESET E BASE
+           ======================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-main);
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .container {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* ========================================
+           HERO SECTION
+           ======================================== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: var(--spacing-mobile) 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-green);
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+        
+        .hero h1 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 18px;
+            color: var(--color-text-gray);
+            margin-bottom: 40px;
+            line-height: 1.5;
+        }
+        
+        /* Form email */
+        .email-form {
+            display: flex;
+            gap: 10px;
+            max-width: 500px;
+            margin: 0 auto;
+            flex-direction: column;
+        }
+        
+        .email-input {
+            flex: 1;
+            padding: 16px 20px;
+            font-size: 16px;
+            border: 2px solid var(--color-border);
+            background: var(--color-bg-section);
+            color: var(--color-text);
+            border-radius: 4px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        
+        .email-input:focus {
+            border-color: var(--color-primary);
+        }
+        
+        .email-input::placeholder {
+            color: var(--color-text-gray);
+        }
+        
+        .cta-button {
+            padding: 16px 32px;
+            font-size: 16px;
+            font-weight: 600;
+            background: var(--gradient-green);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: transform 0.2s, opacity 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+        
+        .cta-button:active {
+            transform: translateY(0);
+        }
+        
+        .form-message {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            display: none;
+        }
+        
+        .form-message.success {
+            background: rgba(0, 212, 170, 0.1);
+            border: 1px solid var(--color-primary);
+            color: var(--color-primary);
+        }
+        
+        .form-message.error {
+            background: rgba(229, 9, 20, 0.1);
+            border: 1px solid #e50914;
+            color: #e50914;
+        }
+        
+        /* ========================================
+           SEZIONI FEATURES
+           ======================================== */
+        .feature-section {
+            padding: var(--spacing-section) 20px;
+            border-top: 1px solid var(--color-border);
+        }
+        
+        .feature-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .feature-text h2 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        
+        .feature-text p {
+            font-size: 18px;
+            color: var(--color-text-gray);
+            line-height: 1.6;
+        }
+        
+        .feature-visual {
+            width: 100%;
+            height: 400px;
+            background: var(--gradient-green);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Alternanza layout desktop */
+        .feature-section:nth-child(even) .feature-content {
+            direction: rtl;
+        }
+        
+        .feature-section:nth-child(even) .feature-text {
+            direction: ltr;
+        }
+        
+        /* ========================================
+           FAQ SECTION
+           ======================================== */
+        .faq-section {
+            padding: var(--spacing-section) 20px;
+            border-top: 1px solid var(--color-border);
+        }
+        
+        .faq-section h2 {
+            font-size: 32px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        .faq-question {
+            width: 100%;
+            padding: 24px 0;
+            background: none;
+            border: none;
+            color: var(--color-text);
+            font-size: 18px;
+            font-weight: 500;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: color 0.3s;
+        }
+        
+        .faq-question:hover {
+            color: var(--color-primary);
+        }
+        
+        .faq-icon {
+            font-size: 24px;
+            transition: transform 0.3s;
+        }
+        
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .faq-answer-content {
+            padding: 0 0 24px 0;
+            color: var(--color-text-gray);
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 300px;
+        }
+        
+        /* ========================================
+           FOOTER CTA
+           ======================================== */
+        .footer-cta {
+            padding: var(--spacing-section) 20px;
+            text-align: center;
+            border-top: 1px solid var(--color-border);
+        }
+        
+        .footer-cta h2 {
+            font-size: 28px;
+            margin-bottom: 30px;
+        }
+        
+        /* ========================================
+           FOOTER
+           ======================================== */
+        footer {
+            padding: 40px 20px;
+            border-top: 1px solid var(--color-border);
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: var(--color-text-gray);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--color-primary);
+        }
+        
+        .copyright {
+            color: var(--color-text-gray);
+            font-size: 14px;
+        }
+        
+        /* ========================================
+           RESPONSIVE - TABLET
+           ======================================== */
+        @media (min-width: 768px) {
+            .hero h1 {
+                font-size: 48px;
+            }
+            
+            .hero p {
+                font-size: 20px;
+            }
+            
+            .email-form {
+                flex-direction: row;
+            }
+            
+            .feature-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 60px;
+            }
+            
+            .feature-section {
+                padding: 100px 20px;
+            }
+        }
+        
+        /* ========================================
+           RESPONSIVE - DESKTOP
+           ======================================== */
+        @media (min-width: 1024px) {
+            .hero h1 {
+                font-size: 56px;
+            }
+            
+            .hero p {
+                font-size: 22px;
+            }
+            
+            .feature-text h2 {
+                font-size: 40px;
+            }
+            
+            .feature-text p {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ========================================
+         HERO SECTION
+         ======================================== -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Basta perdere tempo a pensare cosa comprare</h1>
+            <p>Ziply prepara la tua lista della spesa personalizzata. Tu la modifichi e sei pronto.</p>
+            
+            <form class="email-form" id="waitlistForm">
+                <input 
+                    type="email" 
+                    class="email-input" 
+                    placeholder="Inserisci la tua email" 
+                    required
+                    id="emailInput"
+                >
+                <button type="submit" class="cta-button">Accedi in Anteprima</button>
+            </form>
+            
+            <div class="form-message" id="formMessage"></div>
+        </div>
+    </section>
+    
+    <!-- ========================================
+         SEZIONE 1: RISPARMIA TEMPO
+         ======================================== -->
+    <section class="feature-section">
+        <div class="container">
+            <div class="feature-content">
+                <div class="feature-text">
+                    <h2>Risparmia ore ogni settimana</h2>
+                    <p>Ziply pensa alla tua spesa. Tu ti godi il tempo libero senza pensieri.</p>
+                </div>
+                <div class="feature-visual">
+                    Screenshot lista app
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ========================================
+         SEZIONE 2: PERSONALIZZATO
+         ======================================== -->
+    <section class="feature-section">
+        <div class="container">
+            <div class="feature-content">
+                <div class="feature-text">
+                    <h2>Pensato per come mangi davvero</h2>
+                    <p>Ogni lista si adatta alle tue abitudini, gusti e necessità. Modifichi quello che vuoi in un tap.</p>
+                </div>
+                <div class="feature-visual">
+                    Screenshot editing lista
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ========================================
+         SEZIONE 3: RISPARMI SOLDI
+         ======================================== -->
+    <section class="feature-section">
+        <div class="container">
+            <div class="feature-content">
+                <div class="feature-text">
+                    <h2>Meno sprechi, più risparmi</h2>
+                    <p>Compri solo l'essenziale. Meno cibo buttato, meno soldi sprecati. La tua spesa costa meno.</p>
+                </div>
+                <div class="feature-visual">
+                    Immagine risparmio
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ========================================
+         FAQ SECTION
+         ======================================== -->
+    <section class="faq-section">
+        <div class="container">
+            <h2>Domande Frequenti</h2>
+            
+            <div class="faq-list">
+                <!-- FAQ 1 -->
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Cos'è Ziply?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Ziply è l'app che prepara la tua lista della spesa settimanale in automatico. Personalizzata per te, modificabile in un tap, sempre pronta quando ti serve.
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- FAQ 2 -->
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Come funziona?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Configuri Ziply una volta sola con le tue preferenze. Ogni settimana ricevi la tua lista personalizzata. Modifichi quello che vuoi, aggiungi o togli prodotti, e sei pronto per la spesa.
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- FAQ 3 -->
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Ziply fa la spesa per me?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            No, Ziply non è un servizio di consegna. Ti prepara la lista intelligente di cosa comprare, poi vai tu al supermercato o ordini online come preferisci.
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- FAQ 4 -->
+                <div class="faq-item">
+                    <button class="faq-question">
+                        I miei dati sono al sicuro?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Assolutamente. I tuoi dati sono protetti e criptati. Non condividiamo mai le tue informazioni personali con terze parti. Privacy garantita al 100%.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ========================================
+         FOOTER CTA
+         ======================================== -->
+    <section class="footer-cta">
+        <div class="container">
+            <h2>Pronto a semplificare la tua spesa?</h2>
+            
+            <form class="email-form" id="waitlistFormFooter">
+                <input 
+                    type="email" 
+                    class="email-input" 
+                    placeholder="Inserisci la tua email" 
+                    required
+                    id="emailInputFooter"
+                >
+                <button type="submit" class="cta-button">Accedi in Anteprima</button>
+            </form>
+            
+            <div class="form-message" id="formMessageFooter"></div>
+        </div>
+    </section>
+    
+    <!-- ========================================
+         FOOTER
+         ======================================== -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#privacy">Privacy Policy</a>
+                <a href="#terms">Termini di Servizio</a>
+                <a href="mailto:support@ziplyapp.it">Contatti</a>
+            </div>
+            <p class="copyright">&copy; 2026 Ziply. Tutti i diritti riservati.</p>
+        </div>
+    </footer>
+    
+    <!-- ========================================
+         JAVASCRIPT
+         ======================================== -->
+    <script>
+        // ========================================
+        // FAQ ACCORDION
+        // ========================================
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const faqItem = button.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                
+                // Chiudi tutti gli altri
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Toggle current
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+        
+        // ========================================
+        // FORM SUBMISSION - SUPABASE
+        // ========================================
+        const SUPABASE_URL = 'https://xhpfrftzcjgnikdzsbzq.supabase.co'; // INSERISCI QUI
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhocGZyZnR6Y2pnbmlrZHpzYnpxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc4OTgwNDIsImV4cCI6MjA4MzQ3NDA0Mn0.Zg4dtHBjmgjXNDQurbZblVvDAQu0TnQ5Gk-j7FZps30'; // INSERISCI QUI
+        
+        async function submitEmail(email, formId) {
+            const messageEl = document.getElementById(formId === 'waitlistForm' ? 'formMessage' : 'formMessageFooter');
+            
+            try {
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/waitlist`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'apikey': SUPABASE_ANON_KEY,
+                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                        'Prefer': 'return=minimal'
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        source: 'landing_page',
+                        created_at: new Date().toISOString()
+                    })
+                });
+                
+                if (response.ok || response.status === 201) {
+                    messageEl.textContent = '✓ Perfetto! Sei in lista. Ti aggiorneremo presto.';
+                    messageEl.className = 'form-message success';
+                    messageEl.style.display = 'block';
+                    
+                    // Reset form
+                    document.getElementById(formId).reset();
+                    
+                    // Hide message after 5s
+                    setTimeout(() => {
+                        messageEl.style.display = 'none';
+                    }, 5000);
+                } else {
+                    throw new Error('Errore di rete');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                messageEl.textContent = '✗ Qualcosa è andato storto. Riprova tra poco.';
+                messageEl.className = 'form-message error';
+                messageEl.style.display = 'block';
+            }
+        }
+        
+        // Form handler - Hero
+        document.getElementById('waitlistForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('emailInput').value;
+            await submitEmail(email, 'waitlistForm');
+        });
+        
+        // Form handler - Footer
+        document.getElementById('waitlistFormFooter').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('emailInputFooter').value;
+            await submitEmail(email, 'waitlistFormFooter');
+        });
+    </script>
+</body>
+</html>
