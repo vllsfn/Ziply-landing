@@ -42,6 +42,20 @@
         }
         
         /* ========================================
+           ANIMAZIONI FADE-IN
+           ======================================== */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        
+        .fade-in-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* ========================================
            RESET E BASE
            ======================================== */
         * {
@@ -76,7 +90,7 @@
             padding: var(--spacing-mobile) 20px;
             position: relative;
             overflow: hidden;
-            background: radial-gradient(circle at center, rgba(0, 212, 170, 0.08) 0%, rgba(10, 10, 10, 1) 70%);
+            background: radial-gradient(ellipse at center, rgba(0, 212, 170, 0.15) 0%, rgba(10, 95, 78, 0.08) 40%, rgba(10, 10, 10, 1) 100%);
         }
         
         .hero::before {
@@ -84,15 +98,7 @@
         }
         
         .hero-mockup {
-            max-width: 400px;
-            width: 100%;
-            margin: 50px auto 0;
-            filter: drop-shadow(0 30px 80px rgba(0, 212, 170, 0.4));
-        }
-        
-        .hero-mockup img {
-            width: 100%;
-            height: auto;
+            display: none;
         }
         
         .hero-content {
@@ -216,7 +222,7 @@
         
         .feature-visual {
             width: 100%;
-            height: 400px;
+            height: 500px;
             border-radius: 12px;
             overflow: hidden;
             position: relative;
@@ -226,19 +232,21 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: center;
         }
         
         .feature-visual.mockup {
-            background: transparent;
+            background: radial-gradient(ellipse at center, rgba(0, 212, 170, 0.12) 0%, rgba(10, 95, 78, 0.05) 50%, transparent 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 40px;
+            padding: 60px 40px;
         }
         
         .feature-visual.mockup img {
             object-fit: contain;
             max-height: 100%;
+            max-width: 100%;
         }
         
         /* Alternanza layout desktop */
@@ -394,6 +402,15 @@
         }
         
         /* ========================================
+           RESPONSIVE - MOBILE (altezza immagini ridotta)
+           ======================================== */
+        @media (max-width: 767px) {
+            .feature-visual {
+                height: 350px;
+            }
+        }
+        
+        /* ========================================
            RESPONSIVE - DESKTOP
            ======================================== */
         @media (min-width: 1024px) {
@@ -436,17 +453,13 @@
             </form>
             
             <div class="form-message" id="formMessage"></div>
-            
-            <div class="hero-mockup">
-                <img src="img-hero.png" alt="Ziply App - La tua lista della spesa" />
-            </div>
         </div>
     </section>
     
     <!-- ========================================
          SEZIONE 1: RISPARMIA TEMPO
          ======================================== -->
-    <section class="feature-section">
+    <section class="feature-section fade-in-section">
         <div class="container">
             <div class="feature-content">
                 <div class="feature-text">
@@ -454,7 +467,7 @@
                     <p>Ziply pensa alla tua spesa. Tu ti godi il tempo libero senza pensieri.</p>
                 </div>
                 <div class="feature-visual">
-                    <img src="img-section1.jpg" alt="Ingredienti freschi e organizzati" />
+                    <img src="img-section1.jpg" alt="Tempo per la famiglia" />
                 </div>
             </div>
         </div>
@@ -463,7 +476,7 @@
     <!-- ========================================
          SEZIONE 2: PERSONALIZZATO
          ======================================== -->
-    <section class="feature-section">
+    <section class="feature-section fade-in-section">
         <div class="container">
             <div class="feature-content">
                 <div class="feature-text">
@@ -471,7 +484,7 @@
                     <p>Ogni lista si adatta alle tue abitudini, gusti e necessità. Modifichi quello che vuoi in un tap.</p>
                 </div>
                 <div class="feature-visual mockup">
-                    <img src="img-section2.png" alt="Ziply genera la tua lista personalizzata" />
+                    <img src="img-section2.png" alt="Lista personalizzata Ziply" />
                 </div>
             </div>
         </div>
@@ -480,7 +493,7 @@
     <!-- ========================================
          SEZIONE 3: RISPARMI SOLDI
          ======================================== -->
-    <section class="feature-section">
+    <section class="feature-section fade-in-section">
         <div class="container">
             <div class="feature-content">
                 <div class="feature-text">
@@ -488,7 +501,7 @@
                     <p>Compri solo l'essenziale. Meno cibo buttato, meno soldi sprecati. La tua spesa costa meno.</p>
                 </div>
                 <div class="feature-visual">
-                    <img src="img-section3.png" alt="Ordine confermato - risparmio garantito" />
+                    <img src="img-section3.jpg" alt="Frigo organizzato - zero sprechi" />
                 </div>
             </div>
         </div>
@@ -497,7 +510,7 @@
     <!-- ========================================
          FAQ SECTION
          ======================================== -->
-    <section class="faq-section">
+    <section class="faq-section fade-in-section">
         <div class="container">
             <h2>Domande Frequenti</h2>
             
@@ -598,6 +611,26 @@
          ======================================== -->
     <script>
         // ========================================
+        // FADE-IN ANIMATION ON SCROLL
+        // ========================================
+        const fadeInSections = document.querySelectorAll('.fade-in-section');
+        
+        const fadeInObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
+        });
+        
+        fadeInSections.forEach(section => {
+            fadeInObserver.observe(section);
+        });
+        
+        // ========================================
         // FAQ ACCORDION
         // ========================================
         document.querySelectorAll('.faq-question').forEach(button => {
@@ -620,8 +653,8 @@
         // ========================================
         // FORM SUBMISSION - SUPABASE
         // ========================================
-        const SUPABASE_URL = 'https://xhpfrftzcjgnikdzsbzq.supabase.co'; // INSERISCI QUI
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhocGZyZnR6Y2pnbmlrZHpzYnpxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc4OTgwNDIsImV4cCI6MjA4MzQ3NDA0Mn0.Zg4dtHBjmgjXNDQurbZblVvDAQu0TnQ5Gk-j7FZps30'; // INSERISCI QUI
+        const SUPABASE_URL = 'TUA_SUPABASE_URL'; // INSERISCI QUI
+        const SUPABASE_ANON_KEY = 'TUA_SUPABASE_ANON_KEY'; // INSERISCI QUI
         
         async function submitEmail(email, formId) {
             const messageEl = document.getElementById(formId === 'waitlistForm' ? 'formMessage' : 'formMessageFooter');
