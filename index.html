@@ -193,6 +193,28 @@
             color: #e50914;
         }
         
+        /* Trust badges */
+        .trust-badges {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 24px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            flex-wrap: wrap;
+        }
+        
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .trust-separator {
+            color: rgba(255, 255, 255, 0.3);
+        }
+        
         /* ========================================
            SEZIONI FEATURES
            ======================================== */
@@ -240,13 +262,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 60px 40px;
+            padding: 40px 30px;
         }
         
         .feature-visual.mockup img {
             object-fit: contain;
             max-height: 100%;
-            max-width: 100%;
+            max-width: 85%;
         }
         
         /* Alternanza layout desktop */
@@ -408,6 +430,20 @@
             .feature-visual {
                 height: 350px;
             }
+            
+            .trust-badges {
+                font-size: 13px;
+                gap: 8px;
+            }
+            
+            .trust-separator {
+                display: none;
+            }
+            
+            .trust-item {
+                flex-basis: 100%;
+                justify-content: center;
+            }
         }
         
         /* ========================================
@@ -453,6 +489,15 @@
             </form>
             
             <div class="form-message" id="formMessage"></div>
+            
+            <!-- Trust indicators -->
+            <div class="trust-badges">
+                <span class="trust-item">🔒 Privacy garantita</span>
+                <span class="trust-separator">|</span>
+                <span class="trust-item">⚡ Liste in 20 secondi</span>
+                <span class="trust-separator">|</span>
+                <span class="trust-item">🎯 Zero stress</span>
+            </div>
         </div>
     </section>
     
