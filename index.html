@@ -754,6 +754,8 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
+                    // IMPORTANTE: smetti di osservare dopo prima animazione
+                    observer.unobserve(entry.target);
                 }
             });
         }, observerOptions);
