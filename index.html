@@ -6,6 +6,11 @@
     <meta name="description" content="Ziply - La tua spesa settimanale, sempre pronta. Liste personalizzate, zero sprechi, zero stress.">
     <title>Ziply - La tua spesa, sempre pronta</title>
     
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <!-- Microsoft Clarity -->
     <script type="text/javascript">
         (function(c,l,a,r,i,t,y){
@@ -17,28 +22,25 @@
     
     <style>
         /* ========================================
-           VARIABILI CSS - MODIFICA QUI I COLORI
+           CSS VARIABLES
            ======================================== */
         :root {
-            /* Colori principali */
-            --color-primary: #00D4AA;        /* Verde acqua - CTA */
-            --color-primary-dark: #0A5F4E;   /* Verde scuro */
-            --color-bg: #0a0a0a;             /* Sfondo nero */
-            --color-bg-section: #141414;     /* Sfondo sezioni */
-            --color-text: #ffffff;           /* Testo principale */
-            --color-text-gray: #999999;      /* Testo secondario */
-            --color-border: #333333;         /* Bordi */
+            /* Colori */
+            --color-green-light: #3DD598;
+            --color-green-dark: #0A3D2F;
+            --color-white: #FFFFFF;
+            --color-white-80: rgba(255, 255, 255, 0.8);
+            --color-white-90: rgba(255, 255, 255, 0.9);
+            --color-white-95: rgba(255, 255, 255, 0.95);
+            --color-form-bg: rgba(255, 255, 255, 0.95);
+            --color-form-text: #666666;
             
             /* Font */
-            --font-main: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             
-            /* Spaziature */
+            /* Spacing */
             --spacing-section: 80px;
-            --spacing-mobile: 40px;
-            --container-max: 1200px;
-            
-            /* Gradienti */
-            --gradient-green: linear-gradient(135deg, #00D4AA 0%, #0A5F4E 100%);
+            --spacing-mobile: 60px;
         }
         
         /* ========================================
@@ -66,14 +68,15 @@
         
         body {
             font-family: var(--font-main);
-            background-color: var(--color-bg);
-            color: var(--color-text);
+            background: linear-gradient(180deg, var(--color-green-light) 0%, var(--color-green-dark) 100%);
+            background-attachment: fixed;
+            color: var(--color-white);
             line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
         }
         
         .container {
-            max-width: var(--container-max);
+            max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
@@ -89,22 +92,28 @@
             text-align: center;
             padding: var(--spacing-mobile) 20px;
             position: relative;
-            overflow: hidden;
-            background: radial-gradient(ellipse at center, rgba(0, 212, 170, 0.15) 0%, rgba(10, 95, 78, 0.08) 40%, rgba(10, 10, 10, 1) 100%);
         }
         
         .hero::before {
-            display: none;
-        }
-        
-        .hero-mockup {
-            display: none;
+            content: 'COMING SOON';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 120px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.08);
+            letter-spacing: 0.1em;
+            white-space: nowrap;
+            z-index: 0;
+            pointer-events: none;
         }
         
         .hero-content {
+            max-width: 700px;
+            margin: 0 auto;
             position: relative;
             z-index: 1;
-            max-width: 800px;
         }
         
         .hero h1 {
@@ -112,11 +121,14 @@
             font-weight: 700;
             margin-bottom: 20px;
             line-height: 1.2;
+            letter-spacing: -0.02em;
+            color: var(--color-white);
         }
         
         .hero p {
-            font-size: 18px;
-            color: var(--color-text-gray);
+            font-size: 16px;
+            font-weight: 300;
+            color: var(--color-white-95);
             margin-bottom: 40px;
             line-height: 1.5;
         }
@@ -133,31 +145,27 @@
         .email-input {
             flex: 1;
             padding: 16px 20px;
-            font-size: 16px;
-            border: 2px solid var(--color-border);
-            background: var(--color-bg-section);
-            color: var(--color-text);
-            border-radius: 4px;
-            outline: none;
-            transition: border-color 0.3s;
-        }
-        
-        .email-input:focus {
-            border-color: var(--color-primary);
+            font-size: 14px;
+            font-family: var(--font-main);
+            border: none;
+            border-radius: 6px;
+            background: var(--color-form-bg);
+            color: var(--color-form-text);
         }
         
         .email-input::placeholder {
-            color: var(--color-text-gray);
+            color: var(--color-form-text);
         }
         
         .cta-button {
             padding: 16px 32px;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
-            background: var(--gradient-green);
-            color: white;
+            font-family: var(--font-main);
+            background: var(--color-white);
+            color: var(--color-green-dark);
             border: none;
-            border-radius: 4px;
+            border-radius: 6px;
             cursor: pointer;
             transition: transform 0.2s, opacity 0.2s;
             text-transform: uppercase;
@@ -166,7 +174,7 @@
         
         .cta-button:hover {
             transform: translateY(-2px);
-            opacity: 0.9;
+            opacity: 0.95;
         }
         
         .cta-button:active {
@@ -179,18 +187,19 @@
             border-radius: 4px;
             font-size: 14px;
             display: none;
+            font-weight: 400;
         }
         
         .form-message.success {
-            background: rgba(0, 212, 170, 0.1);
-            border: 1px solid var(--color-primary);
-            color: var(--color-primary);
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid var(--color-white);
+            color: var(--color-white);
         }
         
         .form-message.error {
-            background: rgba(229, 9, 20, 0.1);
-            border: 1px solid #e50914;
-            color: #e50914;
+            background: rgba(255, 100, 100, 0.2);
+            border: 1px solid rgba(255, 100, 100, 0.5);
+            color: var(--color-white);
         }
         
         /* Trust badges */
@@ -199,9 +208,10 @@
             align-items: center;
             justify-content: center;
             gap: 12px;
-            margin-top: 24px;
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.7);
+            margin-top: 30px;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--color-white-90);
             flex-wrap: wrap;
         }
         
@@ -212,7 +222,7 @@
         }
         
         .trust-separator {
-            color: rgba(255, 255, 255, 0.3);
+            color: var(--color-white-80);
         }
         
         /* ========================================
@@ -220,7 +230,6 @@
            ======================================== */
         .feature-section {
             padding: var(--spacing-section) 20px;
-            border-top: 1px solid var(--color-border);
         }
         
         .feature-content {
@@ -231,14 +240,16 @@
         }
         
         .feature-text h2 {
-            font-size: 32px;
-            font-weight: 700;
+            font-size: 28px;
+            font-weight: 600;
             margin-bottom: 16px;
+            color: var(--color-white);
         }
         
         .feature-text p {
-            font-size: 18px;
-            color: var(--color-text-gray);
+            font-size: 16px;
+            font-weight: 300;
+            color: var(--color-white-90);
             line-height: 1.6;
         }
         
@@ -248,6 +259,7 @@
             border-radius: 12px;
             overflow: hidden;
             position: relative;
+            border: 0.5px solid rgba(255, 255, 255, 0.25);
         }
         
         .feature-visual img {
@@ -258,7 +270,7 @@
         }
         
         .feature-visual.mockup {
-            background: radial-gradient(ellipse at center, rgba(0, 212, 170, 0.12) 0%, rgba(10, 95, 78, 0.05) 50%, transparent 100%);
+            background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -271,106 +283,103 @@
             max-width: 85%;
         }
         
-        /* Alternanza layout desktop */
-        .feature-section:nth-child(even) .feature-content {
-            direction: rtl;
-        }
-        
-        .feature-section:nth-child(even) .feature-text {
-            direction: ltr;
-        }
-        
         /* ========================================
            FAQ SECTION
            ======================================== */
         .faq-section {
             padding: var(--spacing-section) 20px;
-            border-top: 1px solid var(--color-border);
         }
         
         .faq-section h2 {
-            font-size: 32px;
-            font-weight: 700;
             text-align: center;
-            margin-bottom: 40px;
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 50px;
+            color: var(--color-white);
         }
         
-        .faq-list {
+        .faq-container {
             max-width: 800px;
             margin: 0 auto;
         }
         
         .faq-item {
-            border-bottom: 1px solid var(--color-border);
+            margin-bottom: 20px;
+            border: 0.5px solid rgba(255, 255, 255, 0.25);
+            border-radius: 8px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.05);
         }
         
         .faq-question {
             width: 100%;
-            padding: 24px 0;
-            background: none;
+            padding: 20px;
+            background: transparent;
             border: none;
-            color: var(--color-text);
-            font-size: 18px;
-            font-weight: 500;
             text-align: left;
+            font-size: 16px;
+            font-weight: 600;
+            font-family: var(--font-main);
+            color: var(--color-white);
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: color 0.3s;
+            transition: background 0.3s;
         }
         
         .faq-question:hover {
-            color: var(--color-primary);
+            background: rgba(255, 255, 255, 0.08);
         }
         
-        .faq-icon {
+        .faq-question::after {
+            content: '+';
             font-size: 24px;
+            font-weight: 300;
             transition: transform 0.3s;
         }
         
-        .faq-item.active .faq-icon {
+        .faq-question.active::after {
             transform: rotate(45deg);
         }
         
         .faq-answer {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease;
+            transition: max-height 0.3s ease-out;
         }
         
-        .faq-answer-content {
-            padding: 0 0 24px 0;
-            color: var(--color-text-gray);
-            font-size: 16px;
+        .faq-answer.active {
+            max-height: 500px;
+        }
+        
+        .faq-answer p {
+            padding: 0 20px 20px;
+            font-size: 15px;
+            font-weight: 300;
+            color: var(--color-white-90);
             line-height: 1.6;
-        }
-        
-        .faq-item.active .faq-answer {
-            max-height: 300px;
-        }
-        
-        /* ========================================
-           FOOTER CTA
-           ======================================== */
-        .footer-cta {
-            padding: var(--spacing-section) 20px;
-            text-align: center;
-            border-top: 1px solid var(--color-border);
-        }
-        
-        .footer-cta h2 {
-            font-size: 28px;
-            margin-bottom: 30px;
         }
         
         /* ========================================
            FOOTER
            ======================================== */
         footer {
-            padding: 40px 20px;
-            border-top: 1px solid var(--color-border);
+            padding: 60px 20px 40px;
+            border-top: 0.5px solid rgba(255, 255, 255, 0.25);
             text-align: center;
+        }
+        
+        .footer-cta {
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+        
+        .footer-cta h3 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--color-white);
         }
         
         .footer-links {
@@ -382,19 +391,21 @@
         }
         
         .footer-links a {
-            color: var(--color-text-gray);
+            color: var(--color-white-80);
             text-decoration: none;
             font-size: 14px;
+            font-weight: 400;
             transition: color 0.3s;
         }
         
         .footer-links a:hover {
-            color: var(--color-primary);
+            color: var(--color-white);
         }
         
         .copyright {
-            color: var(--color-text-gray);
+            color: var(--color-white-80);
             font-size: 14px;
+            font-weight: 300;
         }
         
         /* ========================================
@@ -406,7 +417,7 @@
             }
             
             .hero p {
-                font-size: 20px;
+                font-size: 18px;
             }
             
             .email-form {
@@ -421,19 +432,28 @@
             .feature-section {
                 padding: 100px 20px;
             }
+            
+            .feature-text h2 {
+                font-size: 32px;
+            }
         }
         
         /* ========================================
            RESPONSIVE - MOBILE (altezza immagini ridotta)
            ======================================== */
         @media (max-width: 767px) {
+            .hero::before {
+                font-size: 48px;
+                letter-spacing: 0.05em;
+            }
+            
             .hero h1 {
                 font-size: 32px;
                 line-height: 1.25;
             }
             
             .hero p {
-                font-size: 16px;
+                font-size: 15px;
                 line-height: 1.5;
             }
             
@@ -442,17 +462,17 @@
             }
             
             .feature-text h2 {
-                font-size: 28px;
+                font-size: 24px;
                 line-height: 1.3;
             }
             
             .feature-text p {
-                font-size: 16px;
+                font-size: 15px;
                 line-height: 1.6;
             }
             
             .trust-badges {
-                font-size: 13px;
+                font-size: 11px;
                 gap: 8px;
             }
             
@@ -475,20 +495,17 @@
             }
             
             .hero p {
-                font-size: 22px;
+                font-size: 20px;
             }
             
             .feature-text h2 {
-                font-size: 40px;
-            }
-            
-            .feature-text p {
-                font-size: 20px;
+                font-size: 36px;
             }
         }
     </style>
 </head>
 <body>
+    
     <!-- ========================================
          HERO SECTION
          ======================================== -->
@@ -499,13 +516,27 @@
             
             <form class="email-form" id="waitlistForm">
                 <input 
+                    type="text" 
+                    class="email-input" 
+                    placeholder="Il tuo nome" 
+                    required
+                    id="nameInput"
+                >
+                <input 
                     type="email" 
                     class="email-input" 
-                    placeholder="Inserisci la tua email" 
+                    placeholder="La tua email" 
                     required
                     id="emailInput"
                 >
-                <button type="submit" class="cta-button">Accedi in Anteprima</button>
+                <input 
+                    type="text" 
+                    class="email-input" 
+                    placeholder="La tua città (es. Brescia, Palazzolo s/O...)" 
+                    required
+                    id="cityInput"
+                >
+                <button type="submit" class="cta-button">Prenota il tuo posto</button>
             </form>
             
             <div class="form-message" id="formMessage"></div>
@@ -579,56 +610,32 @@
         <div class="container">
             <h2>Domande Frequenti</h2>
             
-            <div class="faq-list">
-                <!-- FAQ 1 -->
+            <div class="faq-container">
                 <div class="faq-item">
-                    <button class="faq-question">
-                        Cos'è Ziply?
-                        <span class="faq-icon">+</span>
-                    </button>
+                    <button class="faq-question">Cos'è Ziply?</button>
                     <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            Ziply è l'app che prepara la tua lista della spesa settimanale in automatico. Personalizzata per te, modificabile in un tap, sempre pronta quando ti serve.
-                        </div>
+                        <p>Ziply è la tua app per la spesa intelligente. Ti prepara liste personalizzate in base alle tue abitudini, gusti e necessità, facendoti risparmiare tempo e denaro ogni settimana.</p>
                     </div>
                 </div>
                 
-                <!-- FAQ 2 -->
                 <div class="faq-item">
-                    <button class="faq-question">
-                        Come funziona?
-                        <span class="faq-icon">+</span>
-                    </button>
+                    <button class="faq-question">Come funziona?</button>
                     <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            Configuri Ziply una volta sola con le tue preferenze. Ogni settimana ricevi la tua lista personalizzata. Modifichi quello che vuoi, aggiungi o togli prodotti, e sei pronto per la spesa.
-                        </div>
+                        <p>Configuri una volta le tue preferenze alimentari e Ziply genera automaticamente la tua lista settimanale. Puoi modificarla con un tap e sei pronto per la spesa.</p>
                     </div>
                 </div>
                 
-                <!-- FAQ 3 -->
                 <div class="faq-item">
-                    <button class="faq-question">
-                        Ziply fa la spesa per me?
-                        <span class="faq-icon">+</span>
-                    </button>
+                    <button class="faq-question">Ziply fa la spesa per me?</button>
                     <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            No, Ziply non è un servizio di consegna. Ti prepara la lista intelligente di cosa comprare, poi vai tu al supermercato o ordini online come preferisci.
-                        </div>
+                        <p>No, Ziply prepara la lista ma non effettua ordini. Avrai la tua lista pronta e potrai fare la spesa dove preferisci, online o in negozio.</p>
                     </div>
                 </div>
                 
-                <!-- FAQ 4 -->
                 <div class="faq-item">
-                    <button class="faq-question">
-                        I miei dati sono al sicuro?
-                        <span class="faq-icon">+</span>
-                    </button>
+                    <button class="faq-question">I miei dati sono al sicuro?</button>
                     <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            Assolutamente. I tuoi dati sono protetti e criptati. Non condividiamo mai le tue informazioni personali con terze parti. Privacy garantita al 100%.
-                        </div>
+                        <p>Assolutamente sì. I tuoi dati sono protetti e utilizzati solo per personalizzare la tua esperienza. Non condividiamo mai le tue informazioni con terze parti.</p>
                     </div>
                 </div>
             </div>
@@ -636,44 +643,49 @@
     </section>
     
     <!-- ========================================
-         FOOTER CTA
+         FOOTER CON CTA
          ======================================== -->
-    <section class="footer-cta">
-        <div class="container">
-            <h2>Pronto a semplificare la tua spesa?</h2>
+    <footer>
+        <div class="footer-cta">
+            <h3>Pronto a semplificare la tua spesa?</h3>
             
             <form class="email-form" id="waitlistFormFooter">
                 <input 
+                    type="text" 
+                    class="email-input" 
+                    placeholder="Il tuo nome" 
+                    required
+                    id="nameInputFooter"
+                >
+                <input 
                     type="email" 
                     class="email-input" 
-                    placeholder="Inserisci la tua email" 
+                    placeholder="La tua email" 
                     required
                     id="emailInputFooter"
                 >
-                <button type="submit" class="cta-button">Accedi in Anteprima</button>
+                <input 
+                    type="text" 
+                    class="email-input" 
+                    placeholder="La tua città" 
+                    required
+                    id="cityInputFooter"
+                >
+                <button type="submit" class="cta-button">Prenota il tuo posto</button>
             </form>
             
             <div class="form-message" id="formMessageFooter"></div>
         </div>
-    </section>
-    
-    <!-- ========================================
-         FOOTER
-         ======================================== -->
-    <footer>
-        <div class="container">
-            <div class="footer-links">
-                <a href="#privacy">Privacy Policy</a>
-                <a href="#terms">Termini di Servizio</a>
-                <a href="mailto:support@ziplyapp.it">Contatti</a>
-            </div>
-            <p class="copyright">&copy; 2026 Ziply. Tutti i diritti riservati.</p>
+        
+        <div class="footer-links">
+            <a href="#privacy">Privacy</a>
+            <a href="#termini">Termini di servizio</a>
+            <a href="#contatti">Contatti</a>
         </div>
+        
+        <p class="copyright">© 2026 Ziply. Tutti i diritti riservati.</p>
     </footer>
     
-    <!-- ========================================
-         JAVASCRIPT
-         ======================================== -->
     <script>
         // ========================================
         // FADE-IN ANIMATION ON SCROLL
@@ -698,31 +710,70 @@
         // ========================================
         // FAQ ACCORDION
         // ========================================
-        document.querySelectorAll('.faq-question').forEach(button => {
-            button.addEventListener('click', () => {
-                const faqItem = button.parentElement;
-                const isActive = faqItem.classList.contains('active');
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const isActive = question.classList.contains('active');
                 
                 // Chiudi tutti gli altri
-                document.querySelectorAll('.faq-item').forEach(item => {
-                    item.classList.remove('active');
+                faqQuestions.forEach(q => {
+                    q.classList.remove('active');
+                    q.nextElementSibling.classList.remove('active');
                 });
                 
-                // Toggle current
+                // Toggle questo
                 if (!isActive) {
-                    faqItem.classList.add('active');
+                    question.classList.add('active');
+                    answer.classList.add('active');
                 }
             });
         });
         
         // ========================================
+        // EMAIL VALIDATION
+        // ========================================
+        function isValidEmail(email) {
+            // Regex robusta per validazione email
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            
+            // Blocca email temporanee comuni
+            const tempDomains = ['tempmail.com', 'guerrillamail.com', 'mailinator.com', 'throwaway.email', '10minutemail.com'];
+            const domain = email.split('@')[1]?.toLowerCase();
+            
+            if (!emailRegex.test(email)) {
+                return { valid: false, message: 'Email non valida. Controlla il formato.' };
+            }
+            
+            if (tempDomains.includes(domain)) {
+                return { valid: false, message: 'Usa un indirizzo email permanente.' };
+            }
+            
+            if (email.includes('test@') || email.includes('@test.')) {
+                return { valid: false, message: 'Inserisci un indirizzo email reale.' };
+            }
+            
+            return { valid: true };
+        }
+        
+        // ========================================
         // FORM SUBMISSION - SUPABASE
         // ========================================
-        const SUPABASE_URL = 'TUA_SUPABASE_URL'; // INSERISCI QUI
-        const SUPABASE_ANON_KEY = 'TUA_SUPABASE_ANON_KEY'; // INSERISCI QUI
+        const SUPABASE_URL = 'https://xhpfrftzcjgnikdzsbzq.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhocGZyZnR6Y2pnbmlrZHpzYnpxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc4OTgwNDIsImV4cCI6MjA4MzQ3NDA0Mn0.Zg4dtHBjmgjXNDQurbZblVvDAQu0TnQ5Gk-j7FZps30';
         
-        async function submitEmail(email, formId) {
+        async function submitWaitlist(name, email, city, formId) {
             const messageEl = document.getElementById(formId === 'waitlistForm' ? 'formMessage' : 'formMessageFooter');
+            
+            // Validazione email
+            const validation = isValidEmail(email);
+            if (!validation.valid) {
+                messageEl.textContent = '✗ ' + validation.message;
+                messageEl.className = 'form-message error';
+                messageEl.style.display = 'block';
+                return;
+            }
             
             try {
                 const response = await fetch(`${SUPABASE_URL}/rest/v1/waitlist`, {
@@ -734,48 +785,57 @@
                         'Prefer': 'return=minimal'
                     },
                     body: JSON.stringify({
+                        name: name,
                         email: email,
+                        city: city,
                         source: 'landing_page',
                         created_at: new Date().toISOString()
                     })
                 });
                 
-                if (response.ok || response.status === 201) {
-                    messageEl.textContent = '✓ Perfetto! Sei in lista. Ti aggiorneremo presto.';
+                if (response.ok) {
+                    messageEl.textContent = '✓ Perfetto! Controlla la tua email.';
                     messageEl.className = 'form-message success';
                     messageEl.style.display = 'block';
                     
-                    // Reset form
-                    document.getElementById(formId).reset();
-                    
-                    // Hide message after 5s
-                    setTimeout(() => {
-                        messageEl.style.display = 'none';
-                    }, 5000);
+                    // Pulisci form
+                    if (formId === 'waitlistForm') {
+                        document.getElementById('nameInput').value = '';
+                        document.getElementById('emailInput').value = '';
+                        document.getElementById('cityInput').value = '';
+                    } else {
+                        document.getElementById('nameInputFooter').value = '';
+                        document.getElementById('emailInputFooter').value = '';
+                        document.getElementById('cityInputFooter').value = '';
+                    }
                 } else {
-                    throw new Error('Errore di rete');
+                    throw new Error('Errore durante l\'invio');
                 }
             } catch (error) {
-                console.error('Error:', error);
                 messageEl.textContent = '✗ Qualcosa è andato storto. Riprova tra poco.';
                 messageEl.className = 'form-message error';
                 messageEl.style.display = 'block';
             }
         }
         
-        // Form handler - Hero
-        document.getElementById('waitlistForm').addEventListener('submit', async (e) => {
+        // Form hero
+        document.getElementById('waitlistForm').addEventListener('submit', (e) => {
             e.preventDefault();
+            const name = document.getElementById('nameInput').value;
             const email = document.getElementById('emailInput').value;
-            await submitEmail(email, 'waitlistForm');
+            const city = document.getElementById('cityInput').value;
+            submitWaitlist(name, email, city, 'waitlistForm');
         });
         
-        // Form handler - Footer
-        document.getElementById('waitlistFormFooter').addEventListener('submit', async (e) => {
+        // Form footer
+        document.getElementById('waitlistFormFooter').addEventListener('submit', (e) => {
             e.preventDefault();
+            const name = document.getElementById('nameInputFooter').value;
             const email = document.getElementById('emailInputFooter').value;
-            await submitEmail(email, 'waitlistFormFooter');
+            const city = document.getElementById('cityInputFooter').value;
+            submitWaitlist(name, email, city, 'waitlistFormFooter');
         });
     </script>
+    
 </body>
 </html>
