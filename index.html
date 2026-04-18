@@ -6,10 +6,10 @@
     <meta name="description" content="Ziply - La tua spesa settimanale, sempre pronta. Liste personalizzate, zero sprechi, zero stress.">
     <title>Ziply - La tua spesa, sempre pronta</title>
     
-    <!-- Google Fonts - Inter -->
+    <!-- Google Fonts - Outfit -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Microsoft Clarity -->
     <script type="text/javascript">
@@ -25,37 +25,76 @@
            CSS VARIABLES
            ======================================== */
         :root {
-            /* Colori */
-            --color-green-light: #3DD598;
-            --color-green-dark: #0A3D2F;
-            --color-white: #FFFFFF;
-            --color-white-80: rgba(255, 255, 255, 0.8);
-            --color-white-90: rgba(255, 255, 255, 0.9);
-            --color-white-95: rgba(255, 255, 255, 0.95);
-            --color-form-bg: rgba(255, 255, 255, 0.95);
-            --color-form-text: #666666;
+            --color-bg: #0A0A0A;
+            --color-text: #FFFFFF;
+            --color-text-gray: #999999;
+            --color-primary: #3DD598;
+            --color-border: rgba(255, 255, 255, 0.1);
+            --gradient-green: linear-gradient(135deg, #3DD598 0%, #2AB080 100%);
             
-            /* Font */
-            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --font-main: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
             
-            /* Spacing */
-            --spacing-section: 80px;
-            --spacing-mobile: 60px;
+            --spacing-section: 120px;
+            --spacing-mobile: 80px;
         }
         
         /* ========================================
-           ANIMAZIONI FADE-IN
+           ANIMAZIONI STARTUP-STYLE
            ======================================== */
-        .fade-in-section {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
-        .fade-in-section.visible {
-            opacity: 1;
-            transform: translateY(0);
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
+        
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .animate-in {
+            opacity: 0;
+        }
+        
+        .animate-in.visible {
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        
+        .animate-left.visible {
+            animation: fadeInLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        
+        .animate-right.visible {
+            animation: fadeInRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        
+        /* Stagger delay */
+        .animate-in:nth-child(1) { animation-delay: 0.1s; }
+        .animate-in:nth-child(2) { animation-delay: 0.2s; }
+        .animate-in:nth-child(3) { animation-delay: 0.3s; }
+        .animate-in:nth-child(4) { animation-delay: 0.4s; }
         
         /* ========================================
            RESET E BASE
@@ -68,30 +107,30 @@
         
         body {
             font-family: var(--font-main);
-            background: linear-gradient(180deg, var(--color-green-light) 0%, var(--color-green-dark) 100%);
-            background-attachment: fixed;
-            color: var(--color-white);
+            background: var(--color-bg);
+            color: var(--color-text);
             line-height: 1.6;
-            min-height: 100vh;
+            overflow-x: hidden;
         }
         
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 40px;
         }
         
         /* ========================================
-           HERO SECTION
+           HERO SECTION - 2/3 SCHERMO
            ======================================== */
         .hero {
-            min-height: 100vh;
+            min-height: 75vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             padding: var(--spacing-mobile) 20px;
             position: relative;
+            background: radial-gradient(circle at center, rgba(61, 213, 152, 0.1) 0%, transparent 60%);
         }
         
         .hero::before {
@@ -100,9 +139,9 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 120px;
+            font-size: 140px;
             font-weight: 700;
-            color: rgba(255, 255, 255, 0.08);
+            color: rgba(255, 255, 255, 0.03);
             letter-spacing: 0.1em;
             white-space: nowrap;
             z-index: 0;
@@ -110,71 +149,76 @@
         }
         
         .hero-content {
-            max-width: 700px;
+            max-width: 900px;
             margin: 0 auto;
             position: relative;
             z-index: 1;
         }
         
         .hero h1 {
-            font-size: 36px;
+            font-size: 64px;
             font-weight: 700;
-            margin-bottom: 20px;
-            line-height: 1.2;
+            margin-bottom: 24px;
+            line-height: 1.1;
             letter-spacing: -0.02em;
-            color: var(--color-white);
         }
         
         .hero p {
-            font-size: 16px;
-            font-weight: 300;
-            color: var(--color-white-95);
-            margin-bottom: 40px;
-            line-height: 1.5;
+            font-size: 20px;
+            font-weight: 400;
+            color: var(--color-text-gray);
+            margin-bottom: 48px;
+            line-height: 1.4;
         }
         
-        /* Form email */
+        /* Form orizzontale */
         .email-form {
-            display: flex;
-            gap: 10px;
-            max-width: 600px;
-            margin: 0 auto;
-            flex-direction: column;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr) auto;
+            gap: 12px;
+            max-width: 1000px;
+            margin: 0 auto 32px;
         }
         
         .email-input {
-            flex: 1;
-            padding: 16px 20px;
-            font-size: 14px;
+            padding: 18px 24px;
+            font-size: 15px;
             font-family: var(--font-main);
-            border: none;
-            border-radius: 6px;
-            background: var(--color-form-bg);
-            color: var(--color-form-text);
+            font-weight: 400;
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--color-text);
+            transition: all 0.3s ease;
         }
         
         .email-input::placeholder {
-            color: var(--color-form-text);
+            color: var(--color-text-gray);
+        }
+        
+        .email-input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            background: rgba(255, 255, 255, 0.08);
         }
         
         .cta-button {
-            padding: 16px 32px;
+            padding: 18px 40px;
             font-size: 15px;
             font-weight: 600;
             font-family: var(--font-main);
-            background: var(--color-white);
-            color: var(--color-green-dark);
+            background: var(--gradient-green);
+            color: #0A0A0A;
             border: none;
-            border-radius: 6px;
+            border-radius: 12px;
             cursor: pointer;
-            transition: transform 0.2s, opacity 0.2s;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            white-space: nowrap;
         }
         
         .cta-button:hover {
             transform: translateY(-2px);
-            opacity: 0.95;
+            box-shadow: 0 8px 24px rgba(61, 213, 152, 0.3);
         }
         
         .cta-button:active {
@@ -182,24 +226,25 @@
         }
         
         .form-message {
-            margin-top: 15px;
-            padding: 12px;
-            border-radius: 4px;
+            margin-top: 16px;
+            padding: 16px;
+            border-radius: 12px;
             font-size: 14px;
+            font-weight: 500;
             display: none;
-            font-weight: 400;
+            text-align: center;
         }
         
         .form-message.success {
-            background: rgba(255, 255, 255, 0.15);
-            border: 1px solid var(--color-white);
-            color: var(--color-white);
+            background: rgba(61, 213, 152, 0.1);
+            border: 1px solid var(--color-primary);
+            color: var(--color-primary);
         }
         
         .form-message.error {
-            background: rgba(255, 100, 100, 0.2);
-            border: 1px solid rgba(255, 100, 100, 0.5);
-            color: var(--color-white);
+            background: rgba(229, 9, 20, 0.1);
+            border: 1px solid #e50914;
+            color: #ff6b6b;
         }
         
         /* Trust badges */
@@ -207,59 +252,63 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            margin-top: 30px;
-            font-size: 12px;
+            gap: 32px;
+            margin-top: 40px;
+            font-size: 14px;
             font-weight: 500;
-            color: var(--color-white-90);
-            flex-wrap: wrap;
+            color: var(--color-text-gray);
         }
         
         .trust-item {
             display: flex;
             align-items: center;
-            gap: 6px;
-        }
-        
-        .trust-separator {
-            color: var(--color-white-80);
+            gap: 8px;
         }
         
         /* ========================================
-           SEZIONI FEATURES
+           SEZIONI FEATURES - ALTERNATE
            ======================================== */
         .feature-section {
-            padding: var(--spacing-section) 20px;
+            padding: var(--spacing-section) 0;
         }
         
         .feature-content {
             display: grid;
-            grid-template-columns: 1fr;
-            gap: 40px;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
             align-items: center;
         }
         
+        /* Alterna ordine */
+        .feature-section:nth-child(even) .feature-content {
+            direction: rtl;
+        }
+        
+        .feature-section:nth-child(even) .feature-text {
+            direction: ltr;
+        }
+        
         .feature-text h2 {
-            font-size: 28px;
-            font-weight: 600;
-            margin-bottom: 16px;
-            color: var(--color-white);
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
         }
         
         .feature-text p {
-            font-size: 16px;
-            font-weight: 300;
-            color: var(--color-white-90);
+            font-size: 18px;
+            font-weight: 400;
+            color: var(--color-text-gray);
             line-height: 1.6;
         }
         
         .feature-visual {
             width: 100%;
             height: 500px;
-            border-radius: 12px;
+            border-radius: 20px;
             overflow: hidden;
-            position: relative;
-            border: 0.5px solid rgba(255, 255, 255, 0.25);
+            border: 1px solid var(--color-border);
         }
         
         .feature-visual img {
@@ -270,32 +319,33 @@
         }
         
         .feature-visual.mockup {
-            background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
+            background: radial-gradient(ellipse at center, rgba(61, 213, 152, 0.08) 0%, transparent 70%);
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 40px 30px;
+            padding: 60px;
+            border: none;
         }
         
         .feature-visual.mockup img {
             object-fit: contain;
             max-height: 100%;
-            max-width: 85%;
+            max-width: 90%;
         }
         
         /* ========================================
            FAQ SECTION
            ======================================== */
         .faq-section {
-            padding: var(--spacing-section) 20px;
+            padding: var(--spacing-section) 0;
         }
         
         .faq-section h2 {
             text-align: center;
-            font-size: 32px;
-            font-weight: 600;
-            margin-bottom: 50px;
-            color: var(--color-white);
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 64px;
+            letter-spacing: -0.02em;
         }
         
         .faq-container {
@@ -304,37 +354,37 @@
         }
         
         .faq-item {
-            margin-bottom: 20px;
-            border: 0.5px solid rgba(255, 255, 255, 0.25);
-            border-radius: 8px;
+            margin-bottom: 16px;
+            border: 1px solid var(--color-border);
+            border-radius: 16px;
             overflow: hidden;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.02);
+            transition: background 0.3s;
+        }
+        
+        .faq-item:hover {
+            background: rgba(255, 255, 255, 0.04);
         }
         
         .faq-question {
             width: 100%;
-            padding: 20px;
+            padding: 24px;
             background: transparent;
             border: none;
             text-align: left;
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 600;
             font-family: var(--font-main);
-            color: var(--color-white);
+            color: var(--color-text);
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: background 0.3s;
-        }
-        
-        .faq-question:hover {
-            background: rgba(255, 255, 255, 0.08);
         }
         
         .faq-question::after {
             content: '+';
-            font-size: 24px;
+            font-size: 28px;
             font-weight: 300;
             transition: transform 0.3s;
         }
@@ -354,10 +404,10 @@
         }
         
         .faq-answer p {
-            padding: 0 20px 20px;
-            font-size: 15px;
-            font-weight: 300;
-            color: var(--color-white-90);
+            padding: 0 24px 24px;
+            font-size: 16px;
+            font-weight: 400;
+            color: var(--color-text-gray);
             line-height: 1.6;
         }
         
@@ -365,53 +415,53 @@
            FOOTER
            ======================================== */
         footer {
-            padding: 60px 20px 40px;
-            border-top: 0.5px solid rgba(255, 255, 255, 0.25);
-            text-align: center;
+            padding: 80px 0 40px;
+            border-top: 1px solid var(--color-border);
         }
         
         .footer-cta {
-            max-width: 600px;
-            margin: 0 auto 40px;
+            max-width: 900px;
+            margin: 0 auto 64px;
+            text-align: center;
         }
         
         .footer-cta h3 {
-            font-size: 24px;
-            font-weight: 600;
-            margin-bottom: 20px;
-            color: var(--color-white);
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 32px;
+            letter-spacing: -0.02em;
         }
         
         .footer-links {
             display: flex;
-            gap: 30px;
+            gap: 32px;
             justify-content: center;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
+            margin-bottom: 24px;
         }
         
         .footer-links a {
-            color: var(--color-white-80);
+            color: var(--color-text-gray);
             text-decoration: none;
             font-size: 14px;
-            font-weight: 400;
+            font-weight: 500;
             transition: color 0.3s;
         }
         
         .footer-links a:hover {
-            color: var(--color-white);
+            color: var(--color-primary);
         }
         
         .copyright {
-            color: var(--color-white-80);
+            text-align: center;
+            color: var(--color-text-gray);
             font-size: 14px;
-            font-weight: 300;
+            font-weight: 400;
         }
         
         /* ========================================
            RESPONSIVE - TABLET
            ======================================== */
-        @media (min-width: 768px) {
+        @media (max-width: 1024px) {
             .hero h1 {
                 font-size: 48px;
             }
@@ -420,86 +470,78 @@
                 font-size: 18px;
             }
             
-            .email-form {
-                flex-direction: row;
-            }
-            
             .feature-content {
-                grid-template-columns: 1fr 1fr;
                 gap: 60px;
             }
             
-            .feature-section {
-                padding: 100px 20px;
-            }
-            
             .feature-text h2 {
-                font-size: 32px;
+                font-size: 40px;
             }
         }
         
         /* ========================================
-           RESPONSIVE - MOBILE (altezza immagini ridotta)
+           RESPONSIVE - MOBILE
            ======================================== */
-        @media (max-width: 767px) {
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 24px;
+            }
+            
+            .hero {
+                min-height: 90vh;
+            }
+            
             .hero::before {
-                font-size: 48px;
+                font-size: 56px;
                 letter-spacing: 0.05em;
             }
             
             .hero h1 {
-                font-size: 32px;
-                line-height: 1.25;
+                font-size: 36px;
             }
             
             .hero p {
-                font-size: 15px;
-                line-height: 1.5;
+                font-size: 16px;
+                margin-bottom: 32px;
             }
             
-            .feature-visual {
-                height: 350px;
-            }
-            
-            .feature-text h2 {
-                font-size: 24px;
-                line-height: 1.3;
-            }
-            
-            .feature-text p {
-                font-size: 15px;
-                line-height: 1.6;
+            .email-form {
+                grid-template-columns: 1fr;
+                gap: 12px;
             }
             
             .trust-badges {
-                font-size: 11px;
-                gap: 8px;
+                flex-direction: column;
+                gap: 16px;
             }
             
-            .trust-separator {
-                display: none;
+            .feature-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
             }
             
-            .trust-item {
-                flex-basis: 100%;
-                justify-content: center;
-            }
-        }
-        
-        /* ========================================
-           RESPONSIVE - DESKTOP
-           ======================================== */
-        @media (min-width: 1024px) {
-            .hero h1 {
-                font-size: 56px;
-            }
-            
-            .hero p {
-                font-size: 20px;
+            .feature-section:nth-child(even) .feature-content {
+                direction: ltr;
             }
             
             .feature-text h2 {
+                font-size: 32px;
+            }
+            
+            .feature-text p {
+                font-size: 16px;
+            }
+            
+            .feature-visual {
+                height: 400px;
+            }
+            
+            .faq-section h2 {
                 font-size: 36px;
+            }
+            
+            .footer-cta h3 {
+                font-size: 32px;
             }
         }
     </style>
@@ -511,10 +553,10 @@
          ======================================== -->
     <section class="hero">
         <div class="hero-content">
-            <h1>Basta perdere tempo a pensare cosa comprare</h1>
-            <p>Ziply prepara la tua lista della spesa personalizzata. Tu la modifichi e sei&nbsp;pronto.</p>
+            <h1 class="animate-in">Basta perdere tempo a pensare cosa comprare</h1>
+            <p class="animate-in">Ziply prepara la tua lista della spesa personalizzata. Tu la modifichi e sei&nbsp;pronto.</p>
             
-            <form class="email-form" id="waitlistForm">
+            <form class="email-form animate-in" id="waitlistForm">
                 <input 
                     type="text" 
                     class="email-input" 
@@ -532,7 +574,7 @@
                 <input 
                     type="text" 
                     class="email-input" 
-                    placeholder="La tua città (es. Brescia, Palazzolo s/O...)" 
+                    placeholder="La tua città" 
                     required
                     id="cityInput"
                 >
@@ -541,12 +583,9 @@
             
             <div class="form-message" id="formMessage"></div>
             
-            <!-- Trust indicators -->
-            <div class="trust-badges">
+            <div class="trust-badges animate-in">
                 <span class="trust-item">🔒 Privacy garantita</span>
-                <span class="trust-separator">|</span>
                 <span class="trust-item">⚡ Liste in 20 secondi</span>
-                <span class="trust-separator">|</span>
                 <span class="trust-item">🎯 Zero stress</span>
             </div>
         </div>
@@ -555,14 +594,14 @@
     <!-- ========================================
          SEZIONE 1: RISPARMIA TEMPO
          ======================================== -->
-    <section class="feature-section fade-in-section">
+    <section class="feature-section">
         <div class="container">
             <div class="feature-content">
-                <div class="feature-text">
+                <div class="feature-text animate-left">
                     <h2>Risparmia ore ogni settimana</h2>
                     <p>Ziply pensa alla tua spesa. Tu ti godi il tempo libero senza&nbsp;pensieri.</p>
                 </div>
-                <div class="feature-visual">
+                <div class="feature-visual animate-right">
                     <img src="img-section1.jpg" alt="Tempo per la famiglia" />
                 </div>
             </div>
@@ -572,14 +611,14 @@
     <!-- ========================================
          SEZIONE 2: PERSONALIZZATO
          ======================================== -->
-    <section class="feature-section fade-in-section">
+    <section class="feature-section">
         <div class="container">
             <div class="feature-content">
-                <div class="feature-text">
+                <div class="feature-text animate-left">
                     <h2>Pensato per come mangi davvero</h2>
                     <p>Ogni lista si adatta alle tue abitudini, gusti e necessità. Modifichi quello che vuoi in un&nbsp;tap.</p>
                 </div>
-                <div class="feature-visual mockup">
+                <div class="feature-visual mockup animate-right">
                     <img src="img-section2.png" alt="Lista personalizzata Ziply" />
                 </div>
             </div>
@@ -589,14 +628,14 @@
     <!-- ========================================
          SEZIONE 3: RISPARMI SOLDI
          ======================================== -->
-    <section class="feature-section fade-in-section">
+    <section class="feature-section">
         <div class="container">
             <div class="feature-content">
-                <div class="feature-text">
+                <div class="feature-text animate-left">
                     <h2>Meno sprechi, più risparmi</h2>
                     <p>Compri solo l'essenziale. Meno cibo buttato, meno soldi sprecati. La tua spesa costa&nbsp;meno.</p>
                 </div>
-                <div class="feature-visual">
+                <div class="feature-visual animate-right">
                     <img src="img-section3.jpg" alt="Frigo organizzato - zero sprechi" />
                 </div>
             </div>
@@ -606,33 +645,33 @@
     <!-- ========================================
          FAQ SECTION
          ======================================== -->
-    <section class="faq-section fade-in-section">
+    <section class="faq-section">
         <div class="container">
-            <h2>Domande Frequenti</h2>
+            <h2 class="animate-in">Domande Frequenti</h2>
             
             <div class="faq-container">
-                <div class="faq-item">
+                <div class="faq-item animate-in">
                     <button class="faq-question">Cos'è Ziply?</button>
                     <div class="faq-answer">
                         <p>Ziply è la tua app per la spesa intelligente. Ti prepara liste personalizzate in base alle tue abitudini, gusti e necessità, facendoti risparmiare tempo e denaro ogni settimana.</p>
                     </div>
                 </div>
                 
-                <div class="faq-item">
+                <div class="faq-item animate-in">
                     <button class="faq-question">Come funziona?</button>
                     <div class="faq-answer">
                         <p>Configuri una volta le tue preferenze alimentari e Ziply genera automaticamente la tua lista settimanale. Puoi modificarla con un tap e sei pronto per la spesa.</p>
                     </div>
                 </div>
                 
-                <div class="faq-item">
+                <div class="faq-item animate-in">
                     <button class="faq-question">Ziply fa la spesa per me?</button>
                     <div class="faq-answer">
                         <p>No, Ziply prepara la lista ma non effettua ordini. Avrai la tua lista pronta e potrai fare la spesa dove preferisci, online o in negozio.</p>
                     </div>
                 </div>
                 
-                <div class="faq-item">
+                <div class="faq-item animate-in">
                     <button class="faq-question">I miei dati sono al sicuro?</button>
                     <div class="faq-answer">
                         <p>Assolutamente sì. I tuoi dati sono protetti e utilizzati solo per personalizzare la tua esperienza. Non condividiamo mai le tue informazioni con terze parti.</p>
@@ -646,65 +685,68 @@
          FOOTER CON CTA
          ======================================== -->
     <footer>
-        <div class="footer-cta">
-            <h3>Pronto a semplificare la tua spesa?</h3>
+        <div class="container">
+            <div class="footer-cta">
+                <h3 class="animate-in">Pronto a semplificare la tua spesa?</h3>
+                
+                <form class="email-form animate-in" id="waitlistFormFooter">
+                    <input 
+                        type="text" 
+                        class="email-input" 
+                        placeholder="Il tuo nome" 
+                        required
+                        id="nameInputFooter"
+                    >
+                    <input 
+                        type="email" 
+                        class="email-input" 
+                        placeholder="La tua email" 
+                        required
+                        id="emailInputFooter"
+                    >
+                    <input 
+                        type="text" 
+                        class="email-input" 
+                        placeholder="La tua città" 
+                        required
+                        id="cityInputFooter"
+                    >
+                    <button type="submit" class="cta-button">Prenota il tuo posto</button>
+                </form>
+                
+                <div class="form-message" id="formMessageFooter"></div>
+            </div>
             
-            <form class="email-form" id="waitlistFormFooter">
-                <input 
-                    type="text" 
-                    class="email-input" 
-                    placeholder="Il tuo nome" 
-                    required
-                    id="nameInputFooter"
-                >
-                <input 
-                    type="email" 
-                    class="email-input" 
-                    placeholder="La tua email" 
-                    required
-                    id="emailInputFooter"
-                >
-                <input 
-                    type="text" 
-                    class="email-input" 
-                    placeholder="La tua città" 
-                    required
-                    id="cityInputFooter"
-                >
-                <button type="submit" class="cta-button">Prenota il tuo posto</button>
-            </form>
+            <div class="footer-links">
+                <a href="#privacy">Privacy</a>
+                <a href="#termini">Termini di servizio</a>
+                <a href="#contatti">Contatti</a>
+            </div>
             
-            <div class="form-message" id="formMessageFooter"></div>
+            <p class="copyright">© 2026 Ziply. Tutti i diritti riservati.</p>
         </div>
-        
-        <div class="footer-links">
-            <a href="#privacy">Privacy</a>
-            <a href="#termini">Termini di servizio</a>
-            <a href="#contatti">Contatti</a>
-        </div>
-        
-        <p class="copyright">© 2026 Ziply. Tutti i diritti riservati.</p>
     </footer>
     
     <script>
         // ========================================
-        // FADE-IN ANIMATION ON SCROLL
+        // ANIMAZIONI STARTUP-STYLE ON SCROLL
         // ========================================
-        const fadeInSections = document.querySelectorAll('.fade-in-section');
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
         
-        const fadeInObserver = new IntersectionObserver((entries) => {
+        const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
                 }
             });
-        }, {
-            threshold: 0.15,
-            rootMargin: '0px 0px -50px 0px'
-        });
+        }, observerOptions);
         
-        fadeInSections.forEach(section => {
-            fadeInObserver.observe(section);
+        // Osserva tutti gli elementi animati
+        document.querySelectorAll('.animate-in, .animate-left, .animate-right').forEach(el => {
+            observer.observe(el);
         });
         
         // ========================================
@@ -717,13 +759,11 @@
                 const answer = question.nextElementSibling;
                 const isActive = question.classList.contains('active');
                 
-                // Chiudi tutti gli altri
                 faqQuestions.forEach(q => {
                     q.classList.remove('active');
                     q.nextElementSibling.classList.remove('active');
                 });
                 
-                // Toggle questo
                 if (!isActive) {
                     question.classList.add('active');
                     answer.classList.add('active');
@@ -735,10 +775,7 @@
         // EMAIL VALIDATION
         // ========================================
         function isValidEmail(email) {
-            // Regex robusta per validazione email
             const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-            
-            // Blocca email temporanee comuni
             const tempDomains = ['tempmail.com', 'guerrillamail.com', 'mailinator.com', 'throwaway.email', '10minutemail.com'];
             const domain = email.split('@')[1]?.toLowerCase();
             
@@ -758,7 +795,7 @@
         }
         
         // ========================================
-        // FORM SUBMISSION - SUPABASE
+        // FORM SUBMISSION
         // ========================================
         const SUPABASE_URL = 'https://xhpfrftzcjgnikdzsbzq.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhocGZyZnR6Y2pnbmlrZHpzYnpxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc4OTgwNDIsImV4cCI6MjA4MzQ3NDA0Mn0.Zg4dtHBjmgjXNDQurbZblVvDAQu0TnQ5Gk-j7FZps30';
@@ -766,7 +803,6 @@
         async function submitWaitlist(name, email, city, formId) {
             const messageEl = document.getElementById(formId === 'waitlistForm' ? 'formMessage' : 'formMessageFooter');
             
-            // Validazione email
             const validation = isValidEmail(email);
             if (!validation.valid) {
                 messageEl.textContent = '✗ ' + validation.message;
@@ -798,7 +834,6 @@
                     messageEl.className = 'form-message success';
                     messageEl.style.display = 'block';
                     
-                    // Pulisci form
                     if (formId === 'waitlistForm') {
                         document.getElementById('nameInput').value = '';
                         document.getElementById('emailInput').value = '';
@@ -818,7 +853,6 @@
             }
         }
         
-        // Form hero
         document.getElementById('waitlistForm').addEventListener('submit', (e) => {
             e.preventDefault();
             const name = document.getElementById('nameInput').value;
@@ -827,7 +861,6 @@
             submitWaitlist(name, email, city, 'waitlistForm');
         });
         
-        // Form footer
         document.getElementById('waitlistFormFooter').addEventListener('submit', (e) => {
             e.preventDefault();
             const name = document.getElementById('nameInputFooter').value;
