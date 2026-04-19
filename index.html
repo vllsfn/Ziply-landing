@@ -810,78 +810,63 @@
         function isValidEmail(email) {
             const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
             
-            // Blacklist estesa provider email temporanee/fake
+            // Blacklist: TOP 100 provider email temporanee più usati
             const tempDomains = [
-                // Provider temporanei popolari
-                'tempmail.com', 'temp-mail.org', 'temp-mail.io', 'tmpmail.net', 'tmpmail.org',
-                'guerrillamail.com', 'guerrillamail.net', 'guerrillamail.org', 'guerrillamailblock.com',
-                'mailinator.com', 'mailinator.net', 'mailinator2.com', 'mailinator.info',
-                'throwaway.email', 'throwawaymail.com', 'trashmail.com', 'trash-mail.com',
-                '10minutemail.com', '10minutemail.net', '10minutemail.org', '20minutemail.com',
-                'maildrop.cc', 'maildrop.cf', 'maildrop.ga', 'maildrop.gq', 'maildrop.ml',
-                'sharklasers.com', 'guerrillamail.biz', 'grr.la', 'guerrillamail.de',
-                'spam4.me', 'fakeinbox.com', 'yopmail.com', 'yopmail.fr', 'yopmail.net',
-                'getnada.com', 'getairmail.com', 'emailondeck.com', 'jetable.org',
-                'mintemail.com', 'mytemp.email', 'mohmal.com', 'dropmail.me',
-                'dispostable.com', 'emailfake.com', 'emailtemporanea.com', 'emailtemporaire.fr',
-                'crazymailing.com', 'spamgourmet.com', 'mailcatch.com', 'mailnesia.com',
-                'burnermail.io', 'tempail.com', 'tempr.email', 'minuteinbox.com',
-                'fakemail.net', 'harakirimail.com', 'disposablemail.com', 'spambox.us',
-                // Domini usati da 10minutemail e simili
-                'jbsze.ne', 'laafd.com', 'txcct.com', 'iffmx.com', 'vomoto.com',
-                'lroid.com', 'tmmbt.net', 'tmmcv.net', 'clrmail.com', 'disbox.net',
-                'vipmail.name', 'vipmail.pw', 'clrmail.com', 'royalmail.pw',
-                // Domini .tk .ml .ga .cf .gq (spesso usati per spam)
-                'tk', 'ml', 'ga', 'cf', 'gq'
-            ];
-            
-            // Provider email validi/comuni (whitelist)
-            const validProviders = [
-                'gmail.com', 'yahoo.com', 'yahoo.it', 'hotmail.com', 'hotmail.it',
-                'outlook.com', 'outlook.it', 'live.com', 'live.it', 'icloud.com',
-                'libero.it', 'virgilio.it', 'tiscali.it', 'alice.it', 'tin.it',
-                'fastwebnet.it', 'email.it', 'protonmail.com', 'proton.me',
-                'aol.com', 'zoho.com', 'mail.com', 'gmx.com', 'gmx.net'
+                // Top 20 più popolari
+                'tempmail.com', 'temp-mail.org', 'guerrillamail.com', 'mailinator.com',
+                '10minutemail.com', '10minutemail.net', 'yopmail.com', 'maildrop.cc',
+                'throwaway.email', 'sharklasers.com', 'spam4.me', 'fakeinbox.com',
+                'getnada.com', 'emailondeck.com', 'mintemail.com', 'trashmail.com',
+                'getairmail.com', 'burnermail.io', 'temp-mail.io', 'guerrillamail.net',
+                
+                // Altri popolari (30-100)
+                'mailinator.net', 'tmpmail.net', 'mohmal.com', 'dropmail.me',
+                'emailfake.com', 'harakirimail.com', 'minuteinbox.com', 'mytemp.email',
+                'tempail.com', 'fakemail.net', 'guerrillamail.org', 'guerrillamailblock.com',
+                'mailinator2.com', 'mailinator.info', 'throwawaymail.com', 'trash-mail.com',
+                '10minutemail.org', '20minutemail.com', 'maildrop.cf', 'maildrop.ga',
+                'maildrop.gq', 'maildrop.ml', 'guerrillamail.biz', 'grr.la',
+                'guerrillamail.de', 'yopmail.fr', 'yopmail.net', 'jetable.org',
+                'dispostable.com', 'emailtemporanea.com', 'emailtemporaire.fr', 'crazymailing.com',
+                'spamgourmet.com', 'mailcatch.com', 'mailnesia.com', 'tempr.email',
+                'disposablemail.com', 'spambox.us', 'tmpmail.org', 'tmpmail.com',
+                'shortmail.com', 'spamfree24.com', 'spamfree24.de', 'spamfree24.org',
+                'spamfree24.net', 'spamfree24.eu', 'spamfree.eu', 'spamfree24.info',
+                'spamgourmet.net', 'spamgourmet.org', 'spamhole.com', 'spamex.com',
+                'spambog.com', 'spambog.de', 'spambog.ru', 'spamavert.com',
+                'tempemail.com', 'tempemail.net', 'tempinbox.com', 'tempinbox.co.uk',
+                'temp-mails.com', 'tempmailaddress.com', 'tempmailer.com', 'tempmailer.de',
+                'tempmail.de', 'tempmail.eu', 'tempmail.it', 'tempmail.us',
+                'throwam.com', 'trashdevil.com', 'trashdevil.de', 'trashemail.de',
+                'trashymail.com', 'trashymail.net', 'trbvm.com', 'trbvn.com',
+                'turual.com', 'twinmail.de', 'tyldd.com', 'uroid.com',
+                'veryrealemail.com', 'viditag.com', 'viewcastmedia.com', 'viewcastmedia.net',
+                'viewcastmedia.org', 'vomoto.com', 'vpn.st', 'vstup.info',
+                'walkmail.net', 'webemail.me', 'webm4il.info', 'wegwerfadresse.de',
+                'wegwerfemail.com', 'wegwerfemail.de', 'wegwerfmail.de', 'wegwerfmail.net',
+                'wegwerfmail.org', 'wh4f.org', 'whyspam.me', 'willhackforfood.biz',
+                'willselfdestruct.com', 'winemaven.info', 'wronghead.com', 'wuzup.net',
+                'wuzupmail.net', 'wwwnew.eu', 'xagloo.com', 'xemaps.com',
+                'xents.com', 'xmaily.com', 'xoxy.net', 'yapped.net',
+                'yeah.net', 'yert.ye.vc', 'yopmail.pp.ua', 'yopmail.gq',
+                'yuurok.com', 'zehnminuten.de', 'zehnminutenmail.de', 'zetmail.com',
+                'zippymail.info', 'zoemail.com', 'zoemail.net', 'zoemail.org'
             ];
             
             const domain = email.split('@')[1]?.toLowerCase();
-            const tld = domain?.split('.').pop();
             
             if (!emailRegex.test(email)) {
                 return { valid: false, message: 'Email non valida. Controlla il formato.' };
             }
             
-            // Check blacklist domini completi
+            // Check blacklist
             if (tempDomains.includes(domain)) {
                 return { valid: false, message: 'Usa un indirizzo email permanente (no email temporanee).' };
             }
             
-            // Check TLD sospetti (.tk .ml etc)
-            if (['tk', 'ml', 'ga', 'cf', 'gq', 'ne'].includes(tld)) {
-                return { valid: false, message: 'Questo dominio email non è supportato.' };
-            }
-            
-            // Check pattern test/fake
-            if (email.includes('test@') || email.includes('@test.')) {
-                return { valid: false, message: 'Inserisci un indirizzo email reale (no "test").' };
-            }
-            
-            // Check pattern comuni fake
-            if (/^(test|fake|spam|trash|temp|noreply)@/i.test(email)) {
+            // Check pattern fake all'inizio
+            if (/^(test|fake|spam|trash|temp|noreply|admin|info)@/i.test(email)) {
                 return { valid: false, message: 'Inserisci un indirizzo email reale.' };
-            }
-            
-            // Check domini troppo corti o sospetti (solo consonanti/random)
-            const domainName = domain?.split('.')[0];
-            if (domainName && domainName.length <= 5) {
-                // Permetti solo se è un provider noto
-                if (!validProviders.includes(domain)) {
-                    // Check se ha almeno una vocale (domini random spesso non ne hanno)
-                    const hasVowel = /[aeiou]/i.test(domainName);
-                    if (!hasVowel) {
-                        return { valid: false, message: 'Usa un provider email riconosciuto (Gmail, Outlook, etc.).' };
-                    }
-                }
             }
             
             return { valid: true };
