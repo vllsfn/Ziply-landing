@@ -696,6 +696,23 @@
     </section>
     
     <!-- ========================================
+         SEZIONE CONTATTI
+         ======================================== -->
+    <section id="contatti" class="feature-section">
+        <div class="container" style="text-align: center; max-width: 600px; margin: 0 auto;">
+            <h2 class="animate-in" style="margin-bottom: 32px;">Contatti</h2>
+            <p class="animate-in" style="font-size: 18px; color: var(--color-text-gray); margin-bottom: 24px;">
+                Hai domande o vuoi saperne di più su Ziply?
+            </p>
+            <p class="animate-in">
+                <a href="mailto:info@ziplyapp.it" style="color: var(--color-primary); font-size: 24px; font-weight: 600; text-decoration: none;">
+                    info@ziplyapp.it
+                </a>
+            </p>
+        </div>
+    </section>
+    
+    <!-- ========================================
          FOOTER CON CTA
          ======================================== -->
     <footer>
@@ -792,18 +809,52 @@
         // ========================================
         function isValidEmail(email) {
             const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-            const tempDomains = ['tempmail.com', 'guerrillamail.com', 'mailinator.com', 'throwaway.email', '10minutemail.com'];
+            
+            // Blacklist estesa provider email temporanee/fake
+            const tempDomains = [
+                // Provider temporanei popolari
+                'tempmail.com', 'temp-mail.org', 'temp-mail.io', 'tmpmail.net', 'tmpmail.org',
+                'guerrillamail.com', 'guerrillamail.net', 'guerrillamail.org', 'guerrillamailblock.com',
+                'mailinator.com', 'mailinator.net', 'mailinator2.com', 'mailinator.info',
+                'throwaway.email', 'throwawaymail.com', 'trashmail.com', 'trash-mail.com',
+                '10minutemail.com', '10minutemail.net', '10minutemail.org', '20minutemail.com',
+                'maildrop.cc', 'maildrop.cf', 'maildrop.ga', 'maildrop.gq', 'maildrop.ml',
+                'sharklasers.com', 'guerrillamail.biz', 'grr.la', 'guerrillamail.de',
+                'spam4.me', 'fakeinbox.com', 'yopmail.com', 'yopmail.fr', 'yopmail.net',
+                'getnada.com', 'getairmail.com', 'emailondeck.com', 'jetable.org',
+                'mintemail.com', 'mytemp.email', 'mohmal.com', 'dropmail.me',
+                'dispostable.com', 'emailfake.com', 'emailtemporanea.com', 'emailtemporaire.fr',
+                'crazymailing.com', 'spamgourmet.com', 'mailcatch.com', 'mailnesia.com',
+                'burnermail.io', 'tempail.com', 'tempr.email', 'minuteinbox.com',
+                'fakemail.net', 'harakirimail.com', 'disposablemail.com', 'spambox.us',
+                // Domini .tk .ml .ga .cf .gq (spesso usati per spam)
+                'tk', 'ml', 'ga', 'cf', 'gq'
+            ];
+            
             const domain = email.split('@')[1]?.toLowerCase();
             
             if (!emailRegex.test(email)) {
                 return { valid: false, message: 'Email non valida. Controlla il formato.' };
             }
             
+            // Check blacklist domini completi
             if (tempDomains.includes(domain)) {
-                return { valid: false, message: 'Usa un indirizzo email permanente.' };
+                return { valid: false, message: 'Usa un indirizzo email permanente (no email temporanee).' };
             }
             
+            // Check TLD sospetti (.tk .ml etc)
+            const tld = domain?.split('.').pop();
+            if (['tk', 'ml', 'ga', 'cf', 'gq'].includes(tld)) {
+                return { valid: false, message: 'Questo dominio email non è supportato.' };
+            }
+            
+            // Check pattern test/fake
             if (email.includes('test@') || email.includes('@test.')) {
+                return { valid: false, message: 'Inserisci un indirizzo email reale (no "test").' };
+            }
+            
+            // Check pattern comuni fake
+            if (/^(test|fake|spam|trash|temp|noreply)@/i.test(email)) {
                 return { valid: false, message: 'Inserisci un indirizzo email reale.' };
             }
             
