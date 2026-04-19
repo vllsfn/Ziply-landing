@@ -827,11 +827,25 @@
                 'crazymailing.com', 'spamgourmet.com', 'mailcatch.com', 'mailnesia.com',
                 'burnermail.io', 'tempail.com', 'tempr.email', 'minuteinbox.com',
                 'fakemail.net', 'harakirimail.com', 'disposablemail.com', 'spambox.us',
+                // Domini usati da 10minutemail e simili
+                'jbsze.ne', 'laafd.com', 'txcct.com', 'iffmx.com', 'vomoto.com',
+                'lroid.com', 'tmmbt.net', 'tmmcv.net', 'clrmail.com', 'disbox.net',
+                'vipmail.name', 'vipmail.pw', 'clrmail.com', 'royalmail.pw',
                 // Domini .tk .ml .ga .cf .gq (spesso usati per spam)
                 'tk', 'ml', 'ga', 'cf', 'gq'
             ];
             
+            // Provider email validi/comuni (whitelist)
+            const validProviders = [
+                'gmail.com', 'yahoo.com', 'yahoo.it', 'hotmail.com', 'hotmail.it',
+                'outlook.com', 'outlook.it', 'live.com', 'live.it', 'icloud.com',
+                'libero.it', 'virgilio.it', 'tiscali.it', 'alice.it', 'tin.it',
+                'fastwebnet.it', 'email.it', 'protonmail.com', 'proton.me',
+                'aol.com', 'zoho.com', 'mail.com', 'gmx.com', 'gmx.net'
+            ];
+            
             const domain = email.split('@')[1]?.toLowerCase();
+            const tld = domain?.split('.').pop();
             
             if (!emailRegex.test(email)) {
                 return { valid: false, message: 'Email non valida. Controlla il formato.' };
@@ -843,8 +857,7 @@
             }
             
             // Check TLD sospetti (.tk .ml etc)
-            const tld = domain?.split('.').pop();
-            if (['tk', 'ml', 'ga', 'cf', 'gq'].includes(tld)) {
+            if (['tk', 'ml', 'ga', 'cf', 'gq', 'ne'].includes(tld)) {
                 return { valid: false, message: 'Questo dominio email non è supportato.' };
             }
             
@@ -856,6 +869,19 @@
             // Check pattern comuni fake
             if (/^(test|fake|spam|trash|temp|noreply)@/i.test(email)) {
                 return { valid: false, message: 'Inserisci un indirizzo email reale.' };
+            }
+            
+            // Check domini troppo corti o sospetti (solo consonanti/random)
+            const domainName = domain?.split('.')[0];
+            if (domainName && domainName.length <= 5) {
+                // Permetti solo se è un provider noto
+                if (!validProviders.includes(domain)) {
+                    // Check se ha almeno una vocale (domini random spesso non ne hanno)
+                    const hasVowel = /[aeiou]/i.test(domainName);
+                    if (!hasVowel) {
+                        return { valid: false, message: 'Usa un provider email riconosciuto (Gmail, Outlook, etc.).' };
+                    }
+                }
             }
             
             return { valid: true };
