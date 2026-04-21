@@ -159,6 +159,7 @@
         
         body {
             font-family: var(--font-main);
+            background-color: #0A0A0A;
             background: linear-gradient(180deg, 
                 #0A0A0A 0%,           /* Quasi nero (molto scuro) */
                 #0F2B28 50%,          /* Verde molto scuro */
@@ -169,6 +170,10 @@
             line-height: 1.6;
             overflow-x: hidden;
             min-height: 100vh;
+        }
+        
+        html {
+            background-color: #0A0A0A;
         }
         
         .container {
@@ -666,7 +671,24 @@
                 text-align: center;
                 display: block;
                 padding: 14px 24px;
-                font-size: 16px;
+                font-size: 18px;
+                color: #FFFFFF;
+            }
+            
+            /* MOBILE - Sezione 1: centra heading e sub-heading */
+            .feature-section:nth-child(3) .feature-text h2,
+            .feature-section:nth-child(3) .sub-heading {
+                text-align: center;
+            }
+            
+            /* MOBILE - Sezione 2: heading su 2 righe + centrato */
+            .feature-section:nth-child(4) .feature-text h2 {
+                text-align: center;
+            }
+            
+            .line-break-mobile-section2::after {
+                content: "\A";
+                white-space: pre;
             }
             
             /* MOBILE - H2 sezione 3 su 2 righe */
@@ -675,12 +697,19 @@
                 white-space: pre;
             }
             
+            /* MOBILE - Sezione 3: centra heading e sub-heading */
+            .feature-section:nth-child(5) .feature-text h2,
+            .feature-section:nth-child(5) .savings-line {
+                text-align: center;
+            }
+            
             /* MOBILE - Badge sezione 3 centrato */
             .savings-badge {
                 text-align: center;
                 display: block;
                 padding: 14px 24px;
-                font-size: 16px;
+                font-size: 18px;
+                color: #FFFFFF;
             }
             
             .email-form {
@@ -703,7 +732,7 @@
             }
             
             .feature-text h2 {
-                font-size: 32px;
+                font-size: 36px;
                 white-space: normal;
             }
             
@@ -795,7 +824,7 @@
         <div class="container">
             <div class="feature-content">
                 <div class="feature-text animate-left">
-                    <h2>Pensato per come mangi davvero</h2>
+                    <h2><span class="line-break-mobile-section2">Pensato per come</span> mangi davvero</h2>
                     <div class="bullets-box">
                         <ul class="feature-bullets">
                             <li><span class="check-mark">✓</span> Ricorda i tuoi prodotti preferiti</li>
@@ -820,7 +849,7 @@
             <div class="feature-content">
                 <div class="feature-text animate-left">
                     <h2><span class="line-break-mobile">Meno sprechi,</span> più risparmi</h2>
-                    <p class="savings-line">Le famiglie italiane buttano €400/anno di cibo.</p>
+                    <p class="savings-line">Le famiglie italiane buttano in media €400/anno di prodotti.</p>
                     <div class="savings-badge">✨ -40% degli sprechi attraverso le migliori offerte!</div>
                 </div>
                 <div class="feature-visual animate-right">
