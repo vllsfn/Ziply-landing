@@ -159,13 +159,18 @@
         
         body {
             font-family: var(--font-main);
-            background: var(--color-bg);
-            background-image: radial-gradient(ellipse at top, rgba(61, 213, 152, 0.08) 0%, transparent 50%),
-                                radial-gradient(ellipse at bottom, rgba(61, 213, 152, 0.05) 0%, transparent 50%);
+            background: linear-gradient(180deg, 
+                #0A0A0A 0%,           /* Nero in alto */
+                #0D1A1A 30%,          /* Nero con hint verde */
+                #0F2B28 60%,          /* Verde molto scuro */
+                #1A4D47 85%,          /* Verde scuro */
+                #2D7A6E 100%          /* Verde smeraldo/acqua */
+            );
             background-attachment: fixed;
             color: var(--color-text);
             line-height: 1.6;
             overflow-x: hidden;
+            min-height: 100vh;
         }
         
         .container {
@@ -178,7 +183,7 @@
            HERO SECTION - 2/3 SCHERMO
            ======================================== */
         .hero {
-            min-height: 75vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -323,6 +328,9 @@
            SEZIONI FEATURES - ALTERNATE
            ======================================== */
         .feature-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
             padding: var(--spacing-section) 0;
         }
         
@@ -356,6 +364,40 @@
             font-weight: 400;
             color: var(--color-text-gray);
             line-height: 1.6;
+        }
+        
+        /* Time Badge Sezione 1 */
+        .time-badge {
+            display: inline-block;
+            margin-top: 24px;
+            padding: 12px 24px;
+            background: rgba(61, 213, 152, 0.1);
+            border: 2px solid var(--color-primary);
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-primary);
+            animation: fadeInUp 0.8s ease-out 0.3s both;
+        }
+        
+        /* Feature Bullets Sezione 2 */
+        .feature-bullets {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .feature-bullets li {
+            font-size: 18px;
+            font-weight: 400;
+            color: var(--color-text-gray);
+            line-height: 1.6;
+            margin-bottom: 16px;
+            padding-left: 0;
+        }
+        
+        .feature-bullets li:last-child {
+            margin-bottom: 0;
         }
         
         .feature-visual {
@@ -618,7 +660,7 @@
          ======================================== -->
     <section class="hero">
         <div class="hero-content">
-            <h1 class="animate-in">Basta perdere tempo a pensare cosa comprare</h1>
+            <h1 class="animate-in">Basta perdere tempo a pensare a cosa comprare</h1>
             <p class="animate-in">Ziply prepara la tua lista della spesa personalizzata. Zero&nbsp;stress.</p>
             
             <form class="email-form animate-in" id="waitlistForm">
@@ -663,8 +705,8 @@
         <div class="container">
             <div class="feature-content">
                 <div class="feature-text animate-left">
-                    <h2>Risparmia ore ogni settimana</h2>
-                    <p>Vivi la tua giornata. Alla spesa ci pensa Ziply.</p>
+                    <h2>Vivi la tua giornata.<br>Alla spesa ci pensa Ziply.</h2>
+                    <div class="time-badge">⏱️ Fino a 5 ore risparmiate ogni settimana</div>
                 </div>
                 <div class="feature-visual animate-right">
                     <img src="img-section1.jpg" alt="Tempo per la famiglia" />
@@ -681,7 +723,12 @@
             <div class="feature-content">
                 <div class="feature-text animate-left">
                     <h2>Pensato per come mangi davvero</h2>
-                    <p>Ogni lista si adatta alle tue abitudini, gusti e necessità.<br>La modifichi con un solo tap</p>
+                    <ul class="feature-bullets">
+                        <li>✓ Ricorda i tuoi prodotti preferiti</li>
+                        <li>✓ Si adatta a diete e intolleranze</li>
+                        <li>✓ Dimenticato? Modifica con un tap!</li>
+                        <li>✓ e molte altre funzionalità..</li>
+                    </ul>
                 </div>
                 <div class="feature-visual mockup animate-right">
                     <img src="img-section2.png" alt="Lista personalizzata Ziply" />
@@ -698,7 +745,7 @@
             <div class="feature-content">
                 <div class="feature-text animate-left">
                     <h2>Meno sprechi, più risparmi</h2>
-                    <p>Compra solo l'essenziale: meno cibo buttato, meno soldi sprecati.<br>La tua spesa costa meno</p>
+                    <p>Le famiglie italiane buttano €200/anno di cibo. Ziply riduce gli sprechi fino al 40%. Liste precise = frigorifero ottimizzato.</p>
                 </div>
                 <div class="feature-visual animate-right">
                     <img src="img-section3.jpg" alt="Frigo organizzato - zero sprechi" />
