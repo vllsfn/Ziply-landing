@@ -366,18 +366,35 @@
             line-height: 1.6;
         }
         
-        /* Time Badge Sezione 1 */
-        .time-badge {
+        /* Sub-heading Sezione 1 */
+        .sub-heading {
+            font-size: 28px;
+            font-weight: 500;
+            color: var(--color-text);
+            margin-bottom: 32px;
+        }
+        
+        /* Time Badge Large Sezione 1 */
+        .time-badge-large {
             display: inline-block;
-            margin-top: 24px;
-            padding: 12px 24px;
-            background: rgba(61, 213, 152, 0.1);
+            margin-top: 8px;
+            padding: 16px 32px;
+            background: rgba(61, 213, 152, 0.15);
             border: 2px solid var(--color-primary);
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 600;
+            border-radius: 16px;
+            font-size: 20px;
+            font-weight: 700;
             color: var(--color-primary);
             animation: fadeInUp 0.8s ease-out 0.3s both;
+        }
+        
+        /* Bullets Box Sezione 2 */
+        .bullets-box {
+            margin-top: 32px;
+            padding: 32px;
+            background: #FFFFFF;
+            border-radius: 20px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
         }
         
         /* Feature Bullets Sezione 2 */
@@ -389,14 +406,37 @@
         
         .feature-bullets li {
             font-size: 18px;
+            font-weight: 500;
+            color: #0A0A0A;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            padding-left: 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .feature-bullets li:last-child {
+            margin-bottom: 0;
+        }
+        
+        .check-mark {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--color-primary);
+            flex-shrink: 0;
+        }
+        
+        /* Savings Lines Sezione 3 */
+        .savings-line {
+            font-size: 18px;
             font-weight: 400;
             color: var(--color-text-gray);
             line-height: 1.6;
             margin-bottom: 16px;
-            padding-left: 0;
         }
         
-        .feature-bullets li:last-child {
+        .savings-line:last-child {
             margin-bottom: 0;
         }
         
@@ -705,8 +745,9 @@
         <div class="container">
             <div class="feature-content">
                 <div class="feature-text animate-left">
-                    <h2>Vivi la tua giornata.<br>Alla spesa ci pensa Ziply.</h2>
-                    <div class="time-badge">⏱️ Fino a 5 ore risparmiate ogni settimana</div>
+                    <h2>Vivi la tua giornata</h2>
+                    <p class="sub-heading">Alla spesa ci pensa Ziply</p>
+                    <div class="time-badge-large">⏱️ Fino a 5 ore risparmiate ogni settimana</div>
                 </div>
                 <div class="feature-visual animate-right">
                     <img src="img-section1.jpg" alt="Tempo per la famiglia" />
@@ -723,12 +764,14 @@
             <div class="feature-content">
                 <div class="feature-text animate-left">
                     <h2>Pensato per come mangi davvero</h2>
-                    <ul class="feature-bullets">
-                        <li>✓ Ricorda i tuoi prodotti preferiti</li>
-                        <li>✓ Si adatta a diete e intolleranze</li>
-                        <li>✓ Dimenticato? Modifica con un tap!</li>
-                        <li>✓ e molte altre funzionalità..</li>
-                    </ul>
+                    <div class="bullets-box">
+                        <ul class="feature-bullets">
+                            <li><span class="check-mark">✓</span> Ricorda i tuoi prodotti preferiti</li>
+                            <li><span class="check-mark">✓</span> Si adatta a diete e intolleranze</li>
+                            <li><span class="check-mark">✓</span> Dimenticato? Modifica con un tap!</li>
+                            <li><span class="check-mark">✓</span> e molte altre funzionalità..</li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="feature-visual mockup animate-right">
                     <img src="img-section2.png" alt="Lista personalizzata Ziply" />
@@ -745,7 +788,8 @@
             <div class="feature-content">
                 <div class="feature-text animate-left">
                     <h2>Meno sprechi, più risparmi</h2>
-                    <p>Le famiglie italiane buttano €200/anno di cibo. Ziply riduce gli sprechi fino al 40%. Liste precise = frigorifero ottimizzato.</p>
+                    <p class="savings-line">Le famiglie italiane buttano €200/anno di cibo.</p>
+                    <p class="savings-line">Ziply riduce gli sprechi fino al 40%<br>selezionando le migliori offerte per te</p>
                 </div>
                 <div class="feature-visual animate-right">
                     <img src="img-section3.jpg" alt="Frigo organizzato - zero sprechi" />
