@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
     <!-- SEO Meta Tags -->
     <meta name="description" content="Ziply prepara la tua lista della spesa personalizzata in pochi secondi. Zero stress, zero dimenticanze. Iscriviti alla waitlist e riprendi il controllo del tuo tempo.">
@@ -174,6 +174,7 @@
         
         html {
             background-color: #0A0A0A;
+            overflow-x: hidden;
         }
         
         .container {
@@ -660,6 +661,12 @@
             
             .hero {
                 min-height: 90vh;
+            }
+            
+            /* MOBILE - Riduco watermark COMING SOON */
+            .hero::before {
+                font-size: 56px;
+                letter-spacing: 0.05em;
             }
             
             .hero h1 {
