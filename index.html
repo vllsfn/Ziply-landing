@@ -458,6 +458,11 @@
             animation: fadeInUp 0.8s ease-out 0.3s both;
         }
         
+        /* Nascondi br mobile su desktop */
+        .mobile-br {
+            display: none;
+        }
+        
         .feature-visual {
             width: 100%;
             height: 500px;
@@ -671,8 +676,8 @@
                 text-align: center;
                 display: block;
                 padding: 14px 24px;
-                font-size: 18px;
-                color: #FFFFFF;
+                font-size: 20px;
+                color: var(--color-primary);
             }
             
             /* MOBILE - Sezione 1: centra heading e sub-heading */
@@ -708,8 +713,13 @@
                 text-align: center;
                 display: block;
                 padding: 14px 24px;
-                font-size: 18px;
-                color: #FFFFFF;
+                font-size: 20px;
+                color: var(--color-primary);
+            }
+            
+            /* MOBILE - Mostra br dopo "attraverso" */
+            .mobile-br {
+                display: inline;
             }
             
             .email-form {
@@ -850,7 +860,7 @@
                 <div class="feature-text animate-left">
                     <h2><span class="line-break-mobile">Meno sprechi,</span> più risparmi</h2>
                     <p class="savings-line">Le famiglie italiane buttano in media €400/anno di prodotti.</p>
-                    <div class="savings-badge">✨ -40% degli sprechi attraverso le migliori offerte!</div>
+                    <div class="savings-badge">✨ -40% degli sprechi attraverso<br class="mobile-br"> le migliori offerte!</div>
                 </div>
                 <div class="feature-visual animate-right">
                     <img src="img-section3.jpg" alt="Frigo organizzato - zero sprechi" />
