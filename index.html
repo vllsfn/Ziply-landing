@@ -160,11 +160,9 @@
         body {
             font-family: var(--font-main);
             background: linear-gradient(180deg, 
-                #0A0A0A 0%,           /* Nero in alto */
-                #0D1A1A 30%,          /* Nero con hint verde */
-                #0F2B28 60%,          /* Verde molto scuro */
-                #1A4D47 85%,          /* Verde scuro */
-                #2D7A6E 100%          /* Verde smeraldo/acqua */
+                #0A0A0A 0%,           /* Quasi nero (molto scuro) */
+                #0F2B28 50%,          /* Verde molto scuro */
+                #1A4D47 100%          /* Verde scuro */
             );
             background-attachment: fixed;
             color: var(--color-text);
@@ -391,10 +389,11 @@
         /* Bullets Box Sezione 2 */
         .bullets-box {
             margin-top: 32px;
-            padding: 32px;
+            padding: 28px 36px;
             background: #FFFFFF;
             border-radius: 20px;
             box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
         }
         
         /* Feature Bullets Sezione 2 */
@@ -433,11 +432,25 @@
             font-weight: 400;
             color: var(--color-text-gray);
             line-height: 1.6;
-            margin-bottom: 16px;
+            margin-bottom: 24px;
         }
         
         .savings-line:last-child {
             margin-bottom: 0;
+        }
+        
+        /* Savings Badge Sezione 3 */
+        .savings-badge {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 16px 32px;
+            background: rgba(61, 213, 152, 0.15);
+            border: 2px solid var(--color-primary);
+            border-radius: 16px;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-primary);
+            animation: fadeInUp 0.8s ease-out 0.3s both;
         }
         
         .feature-visual {
@@ -466,8 +479,10 @@
         
         .feature-visual.mockup img {
             object-fit: contain;
-            max-height: 100%;
-            max-width: 100%;
+            max-height: none;
+            max-width: none;
+            width: 110%;
+            height: auto;
         }
         
         /* ========================================
@@ -788,8 +803,8 @@
             <div class="feature-content">
                 <div class="feature-text animate-left">
                     <h2>Meno sprechi, più risparmi</h2>
-                    <p class="savings-line">Le famiglie italiane buttano €200/anno di cibo.</p>
-                    <p class="savings-line">Ziply riduce gli sprechi fino al 40%<br>selezionando le migliori offerte per te</p>
+                    <p class="savings-line">Le famiglie italiane buttano €400/anno di cibo.</p>
+                    <div class="savings-badge">✨ -40% degli sprechi attraverso le migliori offerte!</div>
                 </div>
                 <div class="feature-visual animate-right">
                     <img src="img-section3.jpg" alt="Frigo organizzato - zero sprechi" />
