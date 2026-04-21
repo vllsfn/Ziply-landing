@@ -198,7 +198,7 @@
             transform: translate(-50%, -50%);
             font-size: 140px;
             font-weight: 700;
-            color: rgba(255, 255, 255, 0.03);
+            color: rgba(255, 255, 255, 0.01);
             letter-spacing: 0.1em;
             white-space: nowrap;
             z-index: 0;
@@ -652,11 +652,6 @@
                 min-height: 90vh;
             }
             
-            .hero::before {
-                font-size: 56px;
-                letter-spacing: 0.05em;
-            }
-            
             .hero h1 {
                 font-size: 36px;
             }
@@ -664,6 +659,28 @@
             .hero p {
                 font-size: 16px;
                 margin-bottom: 32px;
+            }
+            
+            /* MOBILE - Badge sezione 1 centrato */
+            .time-badge-large {
+                text-align: center;
+                display: block;
+                padding: 14px 24px;
+                font-size: 16px;
+            }
+            
+            /* MOBILE - H2 sezione 3 su 2 righe */
+            .line-break-mobile::after {
+                content: "\A";
+                white-space: pre;
+            }
+            
+            /* MOBILE - Badge sezione 3 centrato */
+            .savings-badge {
+                text-align: center;
+                display: block;
+                padding: 14px 24px;
+                font-size: 16px;
             }
             
             .email-form {
@@ -802,7 +819,7 @@
         <div class="container">
             <div class="feature-content">
                 <div class="feature-text animate-left">
-                    <h2>Meno sprechi, più risparmi</h2>
+                    <h2><span class="line-break-mobile">Meno sprechi,</span> più risparmi</h2>
                     <p class="savings-line">Le famiglie italiane buttano €400/anno di cibo.</p>
                     <div class="savings-badge">✨ -40% degli sprechi attraverso le migliori offerte!</div>
                 </div>
